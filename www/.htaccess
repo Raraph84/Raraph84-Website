@@ -1,0 +1,8 @@
+AuthName "Mot de passe requis"
+AuthType Basic
+AuthUserFile "/home/hebergs/websites/Raraph84-Website/www/.htpasswd"
+Require valid-user
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [L]
