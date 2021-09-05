@@ -13,7 +13,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=80 && react-scripts start",
     "build": "set /p msg=Message ? && react-scripts build && deploy.bat",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
