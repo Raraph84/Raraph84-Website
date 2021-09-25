@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { animate } from "./utils";
-import "./other.css";
-import { getUser } from "./accountUtils";
 
 export class Header extends React.Component {
 
@@ -16,35 +14,39 @@ export class Header extends React.Component {
 
     componentDidMount() {
 
-        getUser().then((user) => {
+        fetch("https://api.raraph84.ml/user", { headers: { authorization: localStorage.getItem("token") } }).then((res) => res.json()).then((res) => {
 
-            this.setState({
+            if (res.code === 200) this.setState({
                 user: {
-                    username: user.username,
-                    avatar: "https://api.raraph84.ml/avatar?userId=" + user.userId
+                    username: res.username,
+                    avatar: "https://api.raraph84.ml/avatar?userId=" + res.userId
                 }
             });
-
-        }).catch((error) => { });
+        });
     }
 
     render() {
-
-        const userInfo = !this.state.user ? <Link className="loginButton" to="/login">Se connecter</Link> : <div className="menu">
-            <div className="user" onClick={() => this.setState({ menu: !this.state.menu })}>
-                <img src={this.state.user.avatar} alt=" " />
-                <span>{this.state.user.username}</span>
-            </div>
-            <div style={{ display: this.state.menu ? "block" : "none" }}>
-                <Link to="/account" onClick={() => this.setState({ menu: false })}>Mon compte</Link>
-                <Link to="/hebergs" onClick={() => this.setState({ menu: false })}>Mes hébergements</Link>
-                <Link to="/logout" onClick={() => this.setState({ menu: false })} style={{ color: "red" }}>Se déconnecter</Link>
-            </div>
-        </div>;
-
         return <header>
-            <Link to="/home" className="logo"><img src="/imgs/logo.png" alt="Logo" /><span>Raraph84</span></Link>
-            {userInfo}
+
+            <Link to="/home" className="logo">
+                <img src="/imgs/logo.png" alt="Logo" />
+                <span>Raraph84</span>
+            </Link>
+
+            {!this.state.user ?
+                <Link className="login" to="/login">Se connecter</Link>
+                :
+                <div className="menu">
+                    <div className="user" onClick={() => this.setState({ menu: !this.state.menu })}>
+                        <img src={this.state.user.avatar} alt=" " />
+                        <span>{this.state.user.username}</span>
+                    </div>
+                    <div style={{ display: this.state.menu ? "block" : "none" }}>
+                        <Link to="/account" onClick={() => this.setState({ menu: false })}>Mon compte</Link>
+                        <Link to="/hebergs" onClick={() => this.setState({ menu: false })}>Mes hébergements</Link>
+                        <Link to="/logout" onClick={() => this.setState({ menu: false })} style={{ color: "red" }}>Se déconnecter</Link>
+                    </div>
+                </div>}
         </header>;
     }
 }
@@ -53,7 +55,6 @@ export class Footer extends React.Component {
 
     render() {
         return <footer>
-            <div>Coucou !</div>
         </footer>;
     }
 }

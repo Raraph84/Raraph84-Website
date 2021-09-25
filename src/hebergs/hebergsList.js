@@ -29,7 +29,7 @@ export default class HebergList extends React.Component {
                 this.setState({ hebergs: hebergs });
 
             } else if (result.code === 401)
-                document.location.replace("/login");
+                document.location.assign("/login");
             else
                 this.setState({ status: "Une erreur est survenue !" });
         });

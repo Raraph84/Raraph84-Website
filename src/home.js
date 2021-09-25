@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./home.css";
 
 export class Home extends React.Component {
 
@@ -14,6 +13,9 @@ export class Home extends React.Component {
     render() {
 
         return <div>
+
+            <link rel="stylesheet" href="/style/home.css" />
+
             <div className="title">Accueil</div>
 
             <div className="subtitle">Salut !</div>

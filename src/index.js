@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import "./common.css";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Heberg from "./hebergs/hebergs";
 import HebergList from "./hebergs/hebergsList";
@@ -19,6 +18,7 @@ class Website extends React.Component {
 
     render() {
         return <BrowserRouter>
+            <link rel="stylesheet" href="/style/common.css" />
             <div id="loading" className="loading" style={{ display: "none" }}><i className="fas fa-spinner"></i></div>
             <Header />
             <div className="content">
@@ -31,7 +31,7 @@ class Website extends React.Component {
                     <Route exact path="/logout"><Logout /></Route>
                     <Route exact path="/hebergs"><HebergList /></Route>
                     <Route exact path="/hebergs/:id"><Heberg /></Route>
-                    <Route exact path="/freenitro">{() => window.location.replace("https://youtu.be/dQw4w9WgXcQ")}</Route>
+                    <Route exact path="/freenitro">{() => window.location.assign("https://youtu.be/dQw4w9WgXcQ")}</Route>
                     <Route path="*"><NotFound /></Route>
                 </Switch>
             </div>

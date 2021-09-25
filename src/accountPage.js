@@ -2,7 +2,6 @@ import React from "react";
 import { Status } from "./other";
 import { changeAvatar, changeEmail, changeUsername, getUser } from "./accountUtils";
 import { toBase64 } from "./utils";
-import "./accountPage.css";
 
 export class AccountPage extends React.Component {
 
@@ -12,7 +11,7 @@ export class AccountPage extends React.Component {
 
         document.title = "Mon compte | Raraph84";
 
-        this.state = { status: "", avatar: "" };
+        this.state = { status: null, avatar: "" };
     }
 
     componentDidMount() {
@@ -86,6 +85,9 @@ export class AccountPage extends React.Component {
         const inputAvatarHandler = async (event) => this.setState({ avatar: await toBase64(event.target.files[0]) });
 
         return <div>
+
+            <link rel="stylesheet" href="/style/accountPage.css" />
+
             <div className="title">Mon compte</div>
             {this.state.status ? <Status message={this.state.status} animate /> : ""}
 

@@ -1,0 +1,245 @@
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: rgb(50, 50, 50);
+    color: white;
+}
+
+header {
+    display: flex;
+    background-color: rgb(100, 100, 100);
+    height: 80px;
+}
+
+header .logo {
+    margin: auto 8px;
+    display: flex;
+    text-decoration: none;
+}
+
+header .logo img {
+    height: 64px;
+}
+
+header .logo span {
+    margin: auto 10px;
+    color: white;
+    font-size: 30px;
+    font-family: Itim;
+}
+
+header .logo:hover span {
+    text-decoration: underline;
+}
+
+header .login {
+    margin: auto;
+    margin-right: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(50, 50, 50);
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+    transition-duration: 150ms;
+    transition-property: background-color;
+}
+
+header .login:hover {
+    background-color: rgb(75, 75, 75);
+}
+
+header .menu {
+    margin: auto;
+    margin-right: 10px;
+    z-index: 10;
+    margin-top: 10px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: rgb(40, 40, 40);
+}
+
+header .menu .user {
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition-property: background-color;
+    transition-duration: 150ms;
+}
+
+header .menu .user:hover {
+    background-color: rgb(75, 75, 75);
+}
+
+header .menu .user img {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 20px;
+    height: 40px;
+    width: 40px;
+    background-color: rgb(75, 75, 75);
+}
+
+header .menu .user span {
+    vertical-align: middle;
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+header .menu a {
+    display: block;
+    border-radius: 10px;
+    padding: 5px;
+    text-decoration: none;
+    color: white;
+}
+
+header .menu a:hover {
+    background-color: rgb(75, 75, 75);
+}
+
+.content {
+    text-align: center;
+    padding: 30px;
+    font-size: 18px;
+}
+
+.content .title {
+    margin-bottom: 15px;
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.content .subtitle {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 30px;
+    text-decoration: underline;
+}
+
+.box {
+    display: inline-block;
+    border-radius: 15px;
+    margin: 10px;
+    padding: 15px;
+    background-color: rgb(100, 100, 100);
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+}
+
+.box a {
+    vertical-align: middle;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.box img {
+    vertical-align: middle;
+    height: 75px;
+    margin-left: 15px;
+    margin-bottom: 5px;
+    border-radius: 20px;
+}
+
+.box .name {
+    vertical-align: middle;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.box .subname {
+    padding-top: 10px;
+    font-weight: bold;
+}
+
+.button {
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border-width: 0;
+    background-color: rgb(100, 100, 100);
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    transition-duration: 150ms;
+    transition-property: background-color, transform;
+}
+
+.button:hover {
+    background-color: rgb(75, 75, 75);
+}
+
+.button:active {
+    transform: translateY(3px);
+}
+
+.link {
+    text-decoration: underline;
+    color: white;
+}
+
+.link:hover {
+    text-decoration: none;
+}
+
+input[type="text"], input[type="password"] {
+    margin-bottom: 15px;
+    padding: 5px;
+    border-width: 0;
+    border-radius: 5px;
+}
+
+input[type="checkbox"] {
+    margin-bottom: 15px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.loading {
+    position: fixed;
+    display: flex;
+    z-index: 100;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.loading i {
+    margin: auto;
+    font-size: 60px;
+    animation-name: spin;
+    animation-duration: 1500ms;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    margin-top: 50px;
+    height: 180px;
+    width: 100%;
+    background-color: rgb(40, 40, 40);
+}
+
+.status {
+    display: inline-block;
+    background-color: rgba(255, 0, 0, 0.25);
+    padding: 10px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    font-size: 20px;
+}

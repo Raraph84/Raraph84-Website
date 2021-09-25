@@ -1,0 +1,46 @@
+.avatar {
+    position: relative;
+    display: inline-flex;
+    height: 100px;
+    width: 100px;
+    cursor: pointer;
+}
+
+.avatar img {
+    background-color: rgb(75, 75, 75);
+    transition-property: filter;
+    transition-duration: 250ms;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.avatar:hover img {
+    filter: brightness(50%);
+}
+
+.avatar span {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 250ms;
+}
+
+.avatar:hover span {
+    opacity: 1;
+}
+
+.avatarButtons {
+    position: relative;
+}
+
+.avatarButtons button {
+    margin-top: 10px;
+    margin-bottom: 0;
+}

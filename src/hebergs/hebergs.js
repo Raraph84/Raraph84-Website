@@ -15,7 +15,7 @@ class Heberg extends React.Component {
 
         this.checkError = (message) => {
             if (message === "Invalid token")
-                document.location.replace("/login");
+                document.location.assign("/login");
             else if (message === "Heberg not exist")
                 this.setState({ status: "Cet hébergement n'existe pas !" });
             else if (message === "No permission")
