@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import { Status } from "../other";
 import { post } from "../utils";
 
-import "./hebergs.css";
-
 class Heberg extends React.Component {
 
     constructor(props) {

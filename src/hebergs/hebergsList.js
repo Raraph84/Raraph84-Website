@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Status } from "../other";
-import { post } from "../utils";
 
 export default class HebergList extends React.Component {
 
@@ -16,7 +15,7 @@ export default class HebergList extends React.Component {
 
     componentDidMount() {
 
-        post("/hebergs", JSON.stringify({ token: localStorage.getItem("token") })).then((result) => {
+        fetch("https://api.raraph84.ml/hebergs", { headers: { authorization: localStorage.getItem("token") } }).then((result) => {
 
             if (result.code === 200) {
 

@@ -1,46 +1,55 @@
+.accountPage div>span {
+    margin-right: 5px;
+}
+
 .avatar {
-    position: relative;
     display: inline-flex;
+}
+
+.avatar>span {
+    margin: auto 5px;
+}
+
+.avatar button {
+    margin: auto 10px;
+}
+
+.avatar .display {
+    position: relative;
+    display: flex;
     height: 100px;
     width: 100px;
     cursor: pointer;
 }
 
-.avatar img {
+.avatar .display img {
     background-color: rgb(75, 75, 75);
-    transition-property: filter;
-    transition-duration: 250ms;
     border-radius: 50px;
     display: flex;
     align-items: center;
+    transition-property: filter;
+    transition-duration: 150ms;
 }
 
-.avatar:hover img {
+.avatar .display:hover img {
     filter: brightness(50%);
 }
 
-.avatar span {
+.avatar .display span {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
     display: flex;
     align-items: center;
+    height: 100%;
+    width: 100%;
     opacity: 0;
     transition-property: opacity;
-    transition-duration: 250ms;
+    transition-duration: 150ms;
 }
 
-.avatar:hover span {
+.avatar .display:hover span {
     opacity: 1;
 }
 
-.avatarButtons {
-    position: relative;
-}
-
-.avatarButtons button {
-    margin-top: 10px;
-    margin-bottom: 0;
+.accountPage .buttons button {
+    margin: 15px 5px;
 }
