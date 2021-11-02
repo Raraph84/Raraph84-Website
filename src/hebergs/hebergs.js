@@ -173,5 +173,4 @@ class Heberg extends React.Component {
     }
 }
 
-// eslint-disable-next-line
 export default (props) => <Heberg {...props} urlParams={useParams()} />;
