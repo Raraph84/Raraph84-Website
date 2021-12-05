@@ -4,3 +4,61 @@
         margin-bottom: 15px;
     }
 }
+
+.account {
+    .avatar {
+        display: inline-flex;
+
+        > span {
+            margin: auto 5px;
+        }
+
+        button {
+            margin: auto 10px;
+        }
+
+        .display {
+            position: relative;
+            display: flex;
+            height: 100px;
+            width: 100px;
+            cursor: pointer;
+        }
+
+        .display img {
+            background-color: rgb(75, 75, 75);
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            transition-property: filter;
+            transition-duration: 150ms;
+        }
+
+        .display:hover img {
+            filter: brightness(50%);
+        }
+
+        .display span {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition-property: opacity;
+            transition-duration: 150ms;
+        }
+
+        .display:hover span {
+            opacity: 1;
+        }
+    }
+
+    .buttons button {
+        margin: 15px 5px;
+    }
+
+    div > span {
+        margin-right: 5px;
+    }
+}

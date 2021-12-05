@@ -1,8 +1,8 @@
-import React from "react";
+import { Component } from "react";
 
 import "./styles/home.scss";
 
-export class Home extends React.Component {
+export class Home extends Component {
     render() {
 
         document.title = "Accueil | Raraph84";

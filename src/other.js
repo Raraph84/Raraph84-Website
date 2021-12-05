@@ -21,6 +21,9 @@ export class Header extends Component {
     }
 
     render() {
+
+        const toggleMenu = () => this.setState({ menu: !this.state.menu });
+
         return <div className="header">
 
             <Link to="/home" className="logo">
@@ -31,12 +34,13 @@ export class Header extends Component {
             {!this.state.user ?
                 <Link className="login" to="/login">Se connecter</Link> :
                 <div className="menu">
-                    <div className="user" onClick={() => this.setState({ menu: !this.state.menu })}>
+                    <div className="user" onClick={toggleMenu}>
                         <img src={this.state.user.avatar} alt=" " />
                         <span>{this.state.user.username}</span>
                     </div>
                     <div style={{ display: this.state.menu ? "" : "none" }}>
-                        <Link to="/logout" onClick={() => this.setState({ menu: false })} style={{ color: "red" }}>Se déconnecter</Link>
+                        <Link to="/account" onClick={toggleMenu}>Mon compte</Link>
+                        <Link to="/logout" onClick={toggleMenu} style={{ color: "red" }}>Se déconnecter</Link>
                     </div>
                 </div>}
         </div>;
@@ -57,7 +61,7 @@ export class NotFound extends Component {
         return <div>
             <div className="title">Tu es perdu ?</div>
             <div className="subtitle">Cette page n'existe pas (ou pas encore)</div>
-            <Link className="button" to="/home">Revenir sur la page principale</Link>
+            <Link to="/home"><button>Revenir sur la page principale</button></Link>
         </div>;
     }
 }

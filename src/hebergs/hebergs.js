@@ -1,9 +1,6 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { Status } from "../other";
-import { post } from "../utils";
+import { Component } from "react";
 
-class Heberg extends React.Component {
+export class Heberg extends Component {
 
     constructor(props) {
 
@@ -172,5 +169,3 @@ class Heberg extends React.Component {
         </div>;
     }
 }
-
-export default (props) => <Heberg {...props} urlParams={useParams()} />;
