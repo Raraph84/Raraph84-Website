@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { Header, NotFound } from "./other";
 import { Home } from "./home";
-import { Login, Logout, Register, Account } from "./account";
+import { Login, Logout, Register } from "./account";
 
 import "./styles/common.scss";
 
