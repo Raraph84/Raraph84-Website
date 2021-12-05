@@ -14,7 +14,7 @@ export class Header extends Component {
         if (!localStorage.getItem("token")) return;
         fetch("https://api.raraph84.ml/user", { headers: { authorization: localStorage.getItem("token") } }).then((res) => res.json()).then((res) => {
             if (res.code === 200)
-                this.setState({ user: { username: res.username, avatar: "https://api.raraph84.ml/avatar?userId=" + res.userId } });
+                this.setState({ user: { username: res.username, avatar: res.avatarUrl || res.defaultAvatarUrl } });
             else if (res.code === 401)
                 localStorage.removeItem("token");
         });
