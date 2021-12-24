@@ -219,12 +219,11 @@ export class Account extends Component {
     }
 
     componentDidMount() {
-        fetch("https://api.raraph84.ml/user", { headers: { authorization: localStorage.getItem("token") } }).then((res) => res.json()).then((res) => {
+        fetch("https://api.raraph84.ml/users/@me", { headers: { authorization: localStorage.getItem("token") } }).then((res) => res.json()).then((res) => {
             if (res.code === 200)
-                this.setState({ avatar: "https://api.raraph84.ml/avatar?userId=" + res.userId });
-            else if (res.code === 401) {
+                this.setState({ avatar: "https://api.raraph84.ml/avatar/" + res.userId });
+            else if (res.code === 401)
                 localStorage.removeItem("token");
-            }
         });
     }
 
@@ -240,12 +239,12 @@ export class Account extends Component {
 
             <div>
                 <span>Nom d'utilisateur :</span>
-                <input ref={this.username} />
+                <input type="text" ref={this.username} />
             </div>
 
             <div>
                 <span>Email :</span>
-                <input ref={this.email} />
+                <input type="text" ref={this.email} />
             </div>
 
             <div>
