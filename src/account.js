@@ -103,7 +103,7 @@ export class Register extends Component {
                 return;
             }
 
-            if (this.password.current.value !== this.passwordVerify.current.value) 
+            if (this.password.current.value !== this.passwordVerify.current.value) {
                 this.setState({ info: <Info>Les mots de passe ne correspondent pas !</Info> });
                 return;
             }
@@ -132,7 +132,7 @@ export class Register extends Component {
                             username_already_exist/*s*/: <Info>Ce nom d'utilisateur est déjà utilisé !</Info>,
                             missing_email: <Info>Email manquante !</Info>,
                             invalid_email: <Info>Email invalide !</Info>,
-                            email_already_exist/*s*/: <Info>Cette adresse email est déjà utilisé !</Info>
+                            email_already_exist/*s*/: <Info>Cette adresse email est déjà utilisé !</Info>,
                             missing_password: <Info>Mot de passe manquant !</Info>,
                             invalid_username_or_password: <Info>Nom d'utilisateur/mot de passe incorrect !</Info>,
                             please_wait_one_day_to_create_another_account: <Info>Trop de créations de comptes, réessaye plus tard !</Info>,
