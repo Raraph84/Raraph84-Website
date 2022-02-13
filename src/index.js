@@ -2,17 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import { Header, NotFound } from "./other";
+import { Header, NotFound, Unavailable } from "./other";
 import { Home } from "./home";
 import { Login, Logout, Register, Account } from "./account";
 
 import "./styles/common.scss";
+
+const UNAVAILABLE = false; // Je ne sais pas s'il y a moyen de recup depuis l'environnement
 
 class Website extends React.Component {
     render() {
         return <BrowserRouter>
             <Header />
             <div className="content">
+                {
+                UNAVAILABLE ?
+                <Unavailable /> :
                 <Switch>
                     <Route exact path="/"><Home /></Route>
                     <Route exact path="/home"><Home /></Route>
@@ -22,6 +27,7 @@ class Website extends React.Component {
                     <Route exact path="/freenitro">{() => window.location.assign("https://www.youtube.com/watch?v=dQw4w9WgXcQ")}</Route>
                     <Route path="*"><NotFound /></Route>
                 </Switch>
+                }
             </div>
         </BrowserRouter>;
     }

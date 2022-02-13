@@ -40,16 +40,17 @@ export class Login extends Component {
                 if (res.code === 200) {
                     localStorage.setItem("token", res.token);
                     document.location.assign("/");
-                } else if (res.message === "Missing username")
-                    this.setState({ requesting: false, info: <Info>Nom d'utilisateur manquant !</Info> });
-                else if (res.message === "Missing password")
-                    this.setState({ requesting: false, info: <Info>Mot de passe manquant !</Info> });
-                else if (res.message === "Invalid username or password")
-                    this.setState({ requesting: false, info: <Info>Nom d'utilisateur/mot de passe incorrect !</Info> });
-                else if (res.message === "Too many login fails")
-                    this.setState({ requesting: false, info: <Info>Trop d'essais de connexion, réessaye plus tard !</Info> });
-
-                else this.setState({ requesting: false, info: <Info>Un problème est survenu !</Info> });
+                } else {
+                    this.setState({
+                        requesting: false,
+                        info: {
+                            missing_username: <Info>Nom d'utilisateur manquant !</Info>,
+                            missing_password: <Info>Mot de passe manquant !</Info>,
+                            invalid_username_or_password: <Info>Nom d'utilisateur/mot de passe incorrect !</Info>,
+                            too_many_login_fails: <Info>Trop d'essais de connexion, réessayez plus tard !</Info>,
+                        }[err.message.toLowerCase().replace(/ /g, '_')] || <Info>Un problème est survenu !</Info>,
+                    });
+                }
             }).catch(() => this.setState({ requesting: false, info: <Info>Un problème est survenu !</Info> }));
         }
 
@@ -121,26 +122,24 @@ export class Register extends Component {
                 if (response.code === 200) {
                     localStorage.setItem("token", response.token);
                     document.location.assign("/");
-                } else if (response.message === "You must accept CGU")
-                    this.setState({ requesting: false, info: <Info>Vous devez lire et accepter les conditions générales d'utilisation !</Info> });
-                else if (response.message === "Missing username")
-                    this.setState({ requesting: false, info: <Info>Nom d'utilisateur manquant !</Info> });
-                else if (response.message === "Username too long")
-                    this.setState({ requesting: false, info: <Info>Le nom d'utilisateur doit faire moins de 25 caractères !</Info> });
-                else if (response.message === "Username already exist")
-                    this.setState({ requesting: false, info: <Info>Ce nom d'utilisateur est déjà utilisé !</Info> });
-                else if (response.message === "Missing email")
-                    this.setState({ requesting: false, info: <Info>Email manquante !</Info> });
-                else if (response.message === "Invalid email")
-                    this.setState({ requesting: false, info: <Info>Email invalide !</Info> });
-                else if (response.message === "Email already exist")
-                    this.setState({ requesting: false, info: <Info>Cette adresse email est déjà utilisé !</Info> });
-                else if (response.message === "Missing password")
-                    this.setState({ requesting: false, info: <Info>Mot de passe manquant !</Info> });
-                else if (response.message === "Please wait one day to create another account")
-                    this.setState({ requesting: false, info: <Info>Trop de créations de comptes, réessaye plus tard !</Info> });
-                else
-                    this.setState({ requesting: false, info: <Info>Un problème est survenu !</Info> });
+                } else {
+                    this.setState({
+                        requesting: false,
+                        info: {
+                            you_must_accept_cgu: <Info>Vous devez lire et accepter les conditions générales d'utilisation !</Info>,
+                            missing_username: <Info>Nom d'utilisateur manquant !</Info>,
+                            username_too_long: <Info>Le nom d'utilisateur doit faire moins de 25 caractères !</Info>,
+                            username_already_exist/*s*/: <Info>Ce nom d'utilisateur est déjà utilisé !</Info>,
+                            missing_email: <Info>Email manquante !</Info>,
+                            invalid_email: <Info>Email invalide !</Info>,
+                            email_already_exist/*s*/: <Info>Cette adresse email est déjà utilisé !</Info>,
+                            missing_password: <Info>Mot de passe manquant !</Info>,
+                            invalid_username_or_password: <Info>Nom d'utilisateur/mot de passe incorrect !</Info>,
+                            please_wait_one_day_to_create_another_account: <Info>Trop de créations de comptes, réessaye plus tard !</Info>,
+                        }[err.message.toLowerCase().replace(/ /g, '_')] || <Info>Un problème est survenu !</Info>,
+                    });
+                }
+            
             });
         }
 

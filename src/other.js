@@ -65,6 +65,18 @@ export class NotFound extends Component {
         </div>;
     }
 }
+    
+export class Unavailable extends Component {
+    render() {
+
+        document.title = "Maintenance | Raraph84";
+
+        return <div>
+            <div className="title">Maintenance</div>
+            <div className="subtitle">Le site subit actuellement des perturbations, veuillez revenir plus tard.</div>
+        </div>;
+    }
+}
 
 export class Info extends Component {
     render() {
