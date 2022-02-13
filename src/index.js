@@ -16,10 +16,8 @@ class Website extends React.Component {
             <Header />
             <div className="content">
                 {{ 
-                UNAVAILABLE ? 
-                <Switch>
-                    <Route path="*"><Unavailable /></Route>
-                </Switch> :
+                UNAVAILABLE ?
+                <Unavailable /> :
                 <Switch>
                     <Route exact path="/"><Home /></Route>
                     <Route exact path="/home"><Home /></Route>
