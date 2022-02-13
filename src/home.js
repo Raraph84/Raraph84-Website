@@ -1,6 +1,6 @@
 import { Component } from "react";
-
 import "./styles/home.scss";
+
 
 export class Home extends Component {
     render() {
@@ -43,10 +43,10 @@ export class Home extends Component {
 
 class Project extends Component {
     render() {
-        return <a href="{{this.link}}" target="_blank" rel="noreferrer" className="box project">
-            <div className="title link">{{this.name}}</div>
-            <img alt="Logo {{this.name}}" src="/imgs/logo-{{this.pid}}.png"></img>
-            <div className="description">{{this.description}}</div>
+        return <a href={this.props.link} target="_blank" rel="noreferrer" className="box project">
+            <div className="title link">{this.props.name}</div>
+            <img alt={"Logo " + this.props.name} src={"/imgs/logo-" + this.props.pid + ".png"}></img>
+            <div className="description">{this.props.description}</div>
         </a>
     }
 }

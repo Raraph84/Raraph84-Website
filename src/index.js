@@ -1,14 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-
-import { Header, NotFound, Unavailable } from "./other";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Login, Logout, Register } from "./account";
 import { Home } from "./home";
-import { Login, Logout, Register, Account } from "./account";
-
+import { Header, NotFound, Unavailable } from "./other";
 import "./styles/common.scss";
 
-const UNAVAILABLE = false; // Je ne sais pas s'il y a moyen de recup depuis l'environnement
+const MAINTENANCE = false;
 
 class Website extends React.Component {
     render() {
@@ -16,17 +14,17 @@ class Website extends React.Component {
             <Header />
             <div className="content">
                 {
-                UNAVAILABLE ?
-                <Unavailable /> :
-                <Switch>
-                    <Route exact path="/"><Home /></Route>
-                    <Route exact path="/home"><Home /></Route>
-                    <Route exact path="/login"><Login /></Route>
-                    <Route exact path="/logout"><Logout /></Route>
-                    <Route exact path="/register"><Register /></Route>
-                    <Route exact path="/freenitro">{() => window.location.assign("https://www.youtube.com/watch?v=dQw4w9WgXcQ")}</Route>
-                    <Route path="*"><NotFound /></Route>
-                </Switch>
+                    MAINTENANCE ?
+                    <Unavailable /> :
+                    <Switch>
+                        <Route exact path="/"><Home /></Route>
+                        <Route exact path="/home"><Home /></Route>
+                        <Route exact path="/login"><Login /></Route>
+                        <Route exact path="/logout"><Logout /></Route>
+                        <Route exact path="/register"><Register /></Route>
+                        <Route exact path="/freenitro">{() => window.location.assign("https://www.youtube.com/watch?v=dQw4w9WgXcQ")}</Route>
+                        <Route path="*"><NotFound /></Route>
+                    </Switch>
                 }
             </div>
         </BrowserRouter>;

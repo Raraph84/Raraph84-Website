@@ -1,8 +1,8 @@
 import { Component, createRef } from "react";
 import { Link } from "react-router-dom";
 import { Info, Loading } from "./other";
-
 import "./styles/account.scss";
+
 
 export class Login extends Component {
 
@@ -48,7 +48,7 @@ export class Login extends Component {
                             missing_password: <Info>Mot de passe manquant !</Info>,
                             invalid_username_or_password: <Info>Nom d'utilisateur/mot de passe incorrect !</Info>,
                             too_many_login_fails: <Info>Trop d'essais de connexion, réessayez plus tard !</Info>,
-                        }[err.message.toLowerCase().replace(/ /g, '_')] || <Info>Un problème est survenu !</Info>,
+                        }[res.message.toLowerCase().replace(/ /g, '_')] || <Info>Un problème est survenu !</Info>,
                     });
                 }
             }).catch(() => this.setState({ requesting: false, info: <Info>Un problème est survenu !</Info> }));
@@ -136,7 +136,7 @@ export class Register extends Component {
                             missing_password: <Info>Mot de passe manquant !</Info>,
                             invalid_username_or_password: <Info>Nom d'utilisateur/mot de passe incorrect !</Info>,
                             please_wait_one_day_to_create_another_account: <Info>Trop de créations de comptes, réessaye plus tard !</Info>,
-                        }[err.message.toLowerCase().replace(/ /g, '_')] || <Info>Un problème est survenu !</Info>,
+                        }[response.message.toLowerCase().replace(/ /g, '_')] || <Info>Un problème est survenu !</Info>,
                     });
                 }
             
