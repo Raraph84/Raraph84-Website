@@ -41,7 +41,7 @@ export class Home extends Component {
     }
 }
 
-export class Project extends Component {
+class Project extends Component {
     render() {
         return <a href="{{this.link}}" target="_blank" rel="noreferrer" className="box project">
             <div className="title link">{{this.name}}</div>
