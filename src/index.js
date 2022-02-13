@@ -15,7 +15,7 @@ class Website extends React.Component {
         return <BrowserRouter>
             <Header />
             <div className="content">
-                {{ 
+                {
                 UNAVAILABLE ?
                 <Unavailable /> :
                 <Switch>
@@ -27,7 +27,7 @@ class Website extends React.Component {
                     <Route exact path="/freenitro">{() => window.location.assign("https://www.youtube.com/watch?v=dQw4w9WgXcQ")}</Route>
                     <Route path="*"><NotFound /></Route>
                 </Switch>
-                }}
+                }
             </div>
         </BrowserRouter>;
     }
