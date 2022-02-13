@@ -126,7 +126,7 @@ export class Register extends Component {
                     this.setState({
                         requesting: false,
                         info: {
-                            you_must_accept_CGU: <Info>Vous devez lire et accepter les conditions générales d'utilisation !</Info>,
+                            you_must_accept_cgu: <Info>Vous devez lire et accepter les conditions générales d'utilisation !</Info>,
                             missing_username: <Info>Nom d'utilisateur manquant !</Info>,
                             username_too_long: <Info>Le nom d'utilisateur doit faire moins de 25 caractères !</Info>,
                             username_already_exist/*s*/: <Info>Ce nom d'utilisateur est déjà utilisé !</Info>,
