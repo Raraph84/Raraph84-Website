@@ -139,7 +139,6 @@ export class Register extends Component {
                         }[response.message.toLowerCase().replace(/ /g, '_')] || <Info>Un problème est survenu !</Info>,
                     });
                 }
-            
             });
         }
 
@@ -202,6 +201,7 @@ export class Logout extends Component {
     }
 }
 
+// Classe à refaire
 export class Account extends Component {
 
     constructor(props) {

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Login, Logout, Register } from "./account";
 import { Home } from "./home";
