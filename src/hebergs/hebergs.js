@@ -9,22 +9,20 @@ export class Heberg extends Component {
         document.title = "Hébergement | Raraph84";
 
         this.checkError = (message) => {
-            if (message === "Invalid token") {
+            if (message === "Invalid token")
                 document.location.assign("/login");
-            } else {
-                this.setState({ status: {
-                    {
-                        heberg_/*does_*/not_exist: "Cet hébergement n'existe pas !",
-                        no_permission: "Vous n'avez pas accès a cet hébergement !",
-                        heberg_already_started: "Cet hébergement est déjà démarré !",
-                        heberg_already_stopped: "Cet hébergement est déjà arrêté !",
-                    }[message.toLowerCase().replace(/ /g, '_')] || "Une erreur est survenue !"
-                }});
-            }
+            else if (message === "Heberg not exist")
+                this.setState({ status: "Cet hébergement n'existe pas !" });
+            else if (message === "No permission")
+                this.setState({ status: "Vous n'avez pas accès a cet hébergement !" });
+            else if (message === "Heberg already started")
+                this.setState({ status: "Cet hébergement est déjà démarré !" });
+            else if (message === "Heberg already stopped")
+                this.setState({ status: "Cet hébergement est déjà arrêté !" });
+            else
+                this.setState({ status: "Une erreur est survenue !" });
         }
 
-        // La suite est une catastrophe, mais flemme de modif
-        
         this.start = () => {
             this.setState({ status: "" });
             post("/heberg/start", JSON.stringify({ token: localStorage.getItem("token"), id: this.id })).then((response) => {
