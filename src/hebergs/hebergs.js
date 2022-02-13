@@ -1,5 +1,6 @@
 import { Component } from "react";
 
+// Classe à refaire
 export class Heberg extends Component {
 
     constructor(props) {

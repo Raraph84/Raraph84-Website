@@ -203,6 +203,7 @@ export class Logout extends Component {
     }
 }
 
+// Classe à refaire
 export class Account extends Component {
 
     constructor(props) {

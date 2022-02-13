@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
 
+// Classe à refaire
 export class HebergList extends Component {
 
     constructor(props) {
