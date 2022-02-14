@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Info, Loading } from "./other";
 import "./styles/account.scss";
 
-
 export class Login extends Component {
 
     constructor(props) {

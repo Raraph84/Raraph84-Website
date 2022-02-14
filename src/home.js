@@ -1,7 +1,6 @@
 import { Component } from "react";
 import "./styles/home.scss";
 
-
 export class Home extends Component {
     render() {
 

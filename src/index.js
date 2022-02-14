@@ -23,7 +23,6 @@ class Website extends React.Component {
                         <Route exact path="/login"><Login /></Route>
                         <Route exact path="/logout"><Logout /></Route>
                         <Route exact path="/register"><Register /></Route>
-                        <Route exact path="/freenitro">{() => window.location.assign("https://www.youtube.com/watch?v=dQw4w9WgXcQ")}</Route>
                         <Route path="*"><NotFound /></Route>
                     </Switch>
                 }
