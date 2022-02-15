@@ -1,4 +1,5 @@
 import { Component } from "react";
+
 import "./styles/home.scss";
 
 export class Home extends Component {
@@ -20,11 +21,11 @@ export class Home extends Component {
 
             <div className="subtitle">Mes projets</div>
             <div className="projects">
-                <Project link="https://eclipsia.fr/" name="Eclipsia" pid="eclipsia" descripion="Eclipsia est un serveur Mini-Jeux créé par des amis." />
-                <Project link="https://discord.gg/AKMzGb9" name="DommiossGroup" pid="dommiossgroup" description="Le DommiossGroup est un groupe de projets web et Minecraft fondé en 2018, développant actuellement un CMS et un serveur Minecraft Roleplay." />
-                <Project link="https://discord.gg/5vZxSUy" name="Cubik Market" pid="cubik-market" description="Le Cubik Market est un market Paladium entièrement réalisé sur Discord." />
-                <Project link="https://discord.gg/HQKUWDe" name="Discord Colonies" pid="discord-colonies" description="Serveur Discord où l'on peut créer son pays, farmer des ressources, coloniser etc." />
-                <Project link="https://discord.gg/GWFzTcN" name="Pala's Fun" pid="palas-fun" description="Bot Discord en rapport avec Paladium." />
+                <Project link="https://eclipsia.fr/" name="Eclipsia" imageUrl="/imgs/logo-eclipsia.png" descripion="Eclipsia est un serveur Mini-Jeux créé par des amis." />
+                <Project link="https://discord.gg/AKMzGb9" name="DommiossGroup" imageUrl="/imgs/logo-dommiossgroup.png" description="Le DommiossGroup est un groupe de projets web et Minecraft fondé en 2018, développant actuellement un CMS et un serveur Minecraft Roleplay." />
+                <Project link="https://discord.gg/5vZxSUy" name="Cubik Market" imageUrl="/imgs/logo-cubik-market.png" description="Le Cubik Market est un market Paladium entièrement réalisé sur Discord." />
+                <Project link="https://discord.gg/HQKUWDe" name="Discord Colonies" imageUrl="/imgs/logo-discord-colonies.png" description="Serveur Discord où l'on peut créer son pays, farmer des ressources, coloniser etc." />
+                <Project link="https://discord.gg/GWFzTcN" name="Pala's Fun" imageUrl="/imgs/logo-palas-fun.png" description="Bot Discord en rapport avec Paladium." />
             </div>
 
             <div className="subtitle">Me contacter</div>
@@ -44,7 +45,7 @@ class Project extends Component {
     render() {
         return <a href={this.props.link} target="_blank" rel="noreferrer" className="box project">
             <div className="title link">{this.props.name}</div>
-            <img alt={"Logo " + this.props.name} src={"/imgs/logo-" + this.props.pid + ".png"}></img>
+            <img alt={"Logo " + this.props.name} src={this.props.imageUrl}></img>
             <div className="description">{this.props.description}</div>
         </a>
     }

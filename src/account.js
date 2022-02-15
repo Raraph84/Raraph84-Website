@@ -1,6 +1,7 @@
 import { Component, createRef } from "react";
 import { Link } from "react-router-dom";
 import { Info, Loading } from "./other";
+
 import "./styles/account.scss";
 
 export class Login extends Component {
@@ -128,10 +129,10 @@ export class Register extends Component {
                             you_must_accept_cgu: <Info>Vous devez lire et accepter les conditions générales d'utilisation !</Info>,
                             missing_username: <Info>Nom d'utilisateur manquant !</Info>,
                             username_too_long: <Info>Le nom d'utilisateur doit faire moins de 25 caractères !</Info>,
-                            username_already_exist/*s*/: <Info>Ce nom d'utilisateur est déjà utilisé !</Info>,
+                            username_already_exists: <Info>Ce nom d'utilisateur est déjà utilisé !</Info>,
                             missing_email: <Info>Email manquante !</Info>,
                             invalid_email: <Info>Email invalide !</Info>,
-                            email_already_exist/*s*/: <Info>Cette adresse email est déjà utilisé !</Info>,
+                            email_already_exists: <Info>Cette adresse email est déjà utilisé !</Info>,
                             missing_password: <Info>Mot de passe manquant !</Info>,
                             invalid_username_or_password: <Info>Nom d'utilisateur/mot de passe incorrect !</Info>,
                             please_wait_one_day_to_create_another_account: <Info>Trop de créations de comptes, réessaye plus tard !</Info>,
