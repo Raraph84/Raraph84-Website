@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { Home } from "./home";
-import { Login, Logout, Register } from "./account";
-import { Header, NotFound, Unavailable } from "./other";
+import { Account, Login, Logout, Register } from "./account";
+import { Footer, Header, NotFound, Unavailable } from "./other";
 
 import "./styles/common.scss";
 
@@ -23,9 +23,11 @@ class Website extends React.Component {
                         <Route exact path="/login"><Login /></Route>
                         <Route exact path="/logout"><Logout /></Route>
                         <Route exact path="/register"><Register /></Route>
+                        <Route exact path="/account"><Account /></Route>
                         <Route path="*"><NotFound /></Route>
                     </Switch>}
             </div>
+            <Footer />
         </BrowserRouter>;
     }
 }

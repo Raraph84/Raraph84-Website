@@ -1,6 +1,7 @@
 import { Component, createRef } from "react";
 import { Link } from "react-router-dom";
 import { Info, Loading } from "./other";
+import { login, createAccount, logout, getUser } from "./api";
 
 import "./styles/account.scss";
 
@@ -20,7 +21,7 @@ export class Login extends Component {
 
         document.title = "Connexion | Raraph84";
 
-        const login = () => {
+        const processLogin = () => {
 
             if (localStorage.getItem("token")) {
                 this.setState({ info: <Info>Vous êtes déjà connecté !</Info> });
@@ -28,30 +29,18 @@ export class Login extends Component {
             }
 
             this.setState({ requesting: true, info: null });
-
-            fetch("https://api.raraph84.ml/login", {
-                method: "POST",
-                body: JSON.stringify({
-                    username: this.username.current.value,
-                    password: this.password.current.value
-                })
-            }).then((res) => res.json()).then((res) => {
-
-                if (res.code === 200) {
-                    localStorage.setItem("token", res.token);
-                    document.location.assign("/");
-                } else {
-                    this.setState({
-                        requesting: false,
-                        info: {
-                            missing_username: <Info>Nom d'utilisateur manquant !</Info>,
-                            missing_password: <Info>Mot de passe manquant !</Info>,
-                            invalid_username_or_password: <Info>Nom d'utilisateur/mot de passe incorrect !</Info>,
-                            too_many_login_fails: <Info>Trop d'essais de connexion, réessayez plus tard !</Info>,
-                        }[res.message.toLowerCase().replace(/ /g, '_')] || <Info>Un problème est survenu !</Info>,
-                    });
-                }
-            }).catch(() => this.setState({ requesting: false, info: <Info>Un problème est survenu !</Info> }));
+            login(this.username.current.value, this.password.current.value).then((token) => {
+                localStorage.setItem("token", token);
+                document.location.assign("/");
+            }).catch((message) => this.setState({
+                requesting: false,
+                info: {
+                    missing_username: <Info>Veuillez saisir un nom d'utilisateur ou une adresse email !</Info>,
+                    missing_password: <Info>Veuillez saisir un mot de passe !</Info>,
+                    too_many_login_fails: <Info>Trop d'essais de connexion, réessayez plus tard !</Info>,
+                    invalid_username_or_password: <Info>Le nom d'utilisateur ou le mot de passe est incorrect !</Info>
+                }[typeof message === "string" ? message.toLowerCase().replace(/ /g, '_') : ""] || <Info>Un problème est survenu !</Info>
+            }));
         }
 
         return <div className="login">
@@ -67,10 +56,10 @@ export class Login extends Component {
 
             <div>
                 <span className="hint">Mot de passe :</span>
-                <input type="password" ref={this.password} disabled={this.state.requesting} onKeyPress={(event) => { if (event.code === "Enter") login() }} />
+                <input type="password" ref={this.password} disabled={this.state.requesting} onKeyPress={(event) => { if (event.code === "Enter") processLogin() }} />
             </div>
 
-            <div><button disabled={this.state.requesting} onClick={login}>Se connecter</button></div>
+            <div><button disabled={this.state.requesting} onClick={processLogin}>Se connecter</button></div>
 
             <Link to="/register"><span className="link">Je n'ai pas de compte</span></Link>
         </div>;
@@ -96,7 +85,7 @@ export class Register extends Component {
 
         document.title = "Créer un compte | Raraph84";
 
-        const createAccount = () => {
+        const processCreateAccount = () => {
 
             if (localStorage.getItem("token")) {
                 this.setState({ info: <Info>Vous êtes déjà connecté !</Info> });
@@ -109,37 +98,22 @@ export class Register extends Component {
             }
 
             this.setState({ requesting: true, info: null });
-            fetch("https://api.raraph84.ml/createAccount", {
-                method: "POST",
-                body: JSON.stringify({
-                    username: this.username.current.value,
-                    email: this.email.current.value,
-                    password: this.password.current.value,
-                    acceptCgu: this.cgu.current.checked
-                })
-            }).then((res) => res.json()).then((response) => {
-
-                if (response.code === 200) {
-                    localStorage.setItem("token", response.token);
-                    document.location.assign("/");
-                } else {
-                    this.setState({
-                        requesting: false,
-                        info: {
-                            you_must_accept_cgu: <Info>Vous devez lire et accepter les conditions générales d'utilisation !</Info>,
-                            missing_username: <Info>Nom d'utilisateur manquant !</Info>,
-                            username_too_long: <Info>Le nom d'utilisateur doit faire moins de 25 caractères !</Info>,
-                            username_already_exists: <Info>Ce nom d'utilisateur est déjà utilisé !</Info>,
-                            missing_email: <Info>Email manquante !</Info>,
-                            invalid_email: <Info>Email invalide !</Info>,
-                            email_already_exists: <Info>Cette adresse email est déjà utilisé !</Info>,
-                            missing_password: <Info>Mot de passe manquant !</Info>,
-                            invalid_username_or_password: <Info>Nom d'utilisateur/mot de passe incorrect !</Info>,
-                            please_wait_one_day_to_create_another_account: <Info>Trop de créations de comptes, réessaye plus tard !</Info>,
-                        }[response.message.toLowerCase().replace(/ /g, '_')] || <Info>Un problème est survenu !</Info>,
-                    });
-                }
-            });
+            createAccount(this.username.current.value, this.email.current.value, this.password.current.value, this.cgu.current.checked).then((token) => {
+                localStorage.setItem("token", token);
+                document.location.assign("/");
+            }).catch((message) => this.setState({
+                requesting: false,
+                info: {
+                    missing_username: <Info>Veuillez saisir un nom d'utilisateur !</Info>,
+                    missing_email: <Info>Veuillez saisir une adresse email !</Info>,
+                    invalid_email: <Info>Veuillez saisir une adresse email valide !</Info>,
+                    missing_password: <Info>Veuillez saisir un mot de passe !</Info>,
+                    you_must_accept_cgu: <Info>Vous devez lire et accepter les conditions générales d'utilisation !</Info>,
+                    too_many_account_creations: <Info>Trop de créations de comptes, réessaye plus tard !</Info>,
+                    username_already_exists: <Info>Ce nom d'utilisateur est déjà utilisé !</Info>,
+                    email_already_exists: <Info>Cette adresse email est déjà utilisé !</Info>
+                }[typeof message === "string" ? message.toLowerCase().replace(/ /g, '_') : ""] || <Info>Un problème est survenu !</Info>
+            }));
         }
 
         return <div className="login">
@@ -150,7 +124,7 @@ export class Register extends Component {
 
             <div>
                 <span className="hint">Nom d'utilisateur :</span>
-                <input type="text" ref={this.username} disabled={this.state.requesting} />
+                <input type="text" ref={this.username} autoFocus disabled={this.state.requesting} maxLength={25} />
             </div>
 
             <div>
@@ -173,7 +147,7 @@ export class Register extends Component {
                 <input type="checkbox" ref={this.cgu} disabled={this.state.requesting} />
             </div>
 
-            <div><button onClick={createAccount}>Créer le compte</button></div>
+            <div><button onClick={processCreateAccount}>Créer le compte</button></div>
 
             <Link to="/login"><span className="link">J'ai déjà un compte</span></Link>
         </div>;
@@ -182,12 +156,28 @@ export class Register extends Component {
 
 export class Logout extends Component {
 
+    constructor(props) {
+
+        super(props);
+
+        this.state = { requesting: false, info: null };
+    }
+
     componentDidMount() {
-        fetch("https://api.raraph84.ml/logout", { method: "POST", headers: { authorization: localStorage.getItem("token") } }).then((response) => {
-            if (response.status === 204)
-                localStorage.removeItem("token");
+
+        if (!localStorage.getItem("token")) {
+            this.setState({ info: <Info>Vous n'êtes déjà pas connecté !</Info> });
+            return;
+        }
+
+        this.setState({ requesting: true });
+        logout().then(() => {
+            localStorage.removeItem("token");
             document.location.assign("/");
-        });
+        }).catch(() => this.setState({
+            requesting: false,
+            info: <Info>Un problème est survenu !</Info>
+        }));
     }
 
     render() {
@@ -196,12 +186,13 @@ export class Logout extends Component {
 
         return <div>
             <div className="title">Déconnexion...</div>
-            <Loading />
+
+            {this.state.requesting ? <Loading /> : null}
+            {this.state.info}
         </div>;
     }
 }
 
-// Classe à refaire
 export class Account extends Component {
 
     constructor(props) {
@@ -214,15 +205,15 @@ export class Account extends Component {
         this.passwordVerify = createRef();
         this.avatar = createRef();
 
-        this.state = { requesting: false, info: null, avatar: null, password: false };
+        this.state = { requesting: false, info: null, me: null, editing: false };
     }
 
     componentDidMount() {
-        fetch("https://api.raraph84.ml/users/@me", { headers: { authorization: localStorage.getItem("token") } }).then((res) => res.json()).then((res) => {
-            if (res.code === 200)
-                this.setState({ avatar: "https://api.raraph84.ml/avatar/" + res.userId });
-            else if (res.code === 401)
+        getUser("@me").then((me) => this.setState({ me })).catch((message) => {
+            if (message === "You must be logged") {
                 localStorage.removeItem("token");
+                document.location.assign("/");
+            } else this.setState({ requesting: false, info: <Info>Un problème est survenu !</Info> });
         });
     }
 
@@ -236,47 +227,45 @@ export class Account extends Component {
             {this.state.requesting ? <Loading /> : null}
             {this.state.info}
 
-            <div>
-                <span>Nom d'utilisateur :</span>
-                <input type="text" ref={this.username} />
-            </div>
-
-            <div>
-                <span>Email :</span>
-                <input type="text" ref={this.email} />
-            </div>
-
-            <div>
-                <span>Mot de passe :</span>
-                <input type="password" ref={this.password} placeholder="Ne pas modifier" autoComplete="new-password" />
-            </div>
-
-            {this.state.password ? <div>
-                <span>Retaper le mot de passe :</span>
-                <input type="password" ref={this.passwordVerify} />
-            </div> : null}
-
-            <div className="avatar">
-                <span>Avatar :</span>
-                <input type="file" id="avatarInput" accept=".png, .jpg, .jpeg, .gif" onChange={async (event) => this.setState({ avatar: await toBase64(event.target.files[0]) })} />
-                <div className="display" onClick={() => document.getElementById("avatarInput").click()}>
-                    <img src={this.state.avatar} className="avatar" alt="Changer d'avatar" />
-                    <span>Changer d'avatar</span>
+            {!this.state.me ? null : <div>
+                En développement !
+                {/*
+                <div>
+                    <span>Nom d'utilisateur :</span>
+                    <input type="text" ref={this.username} />
                 </div>
-                <button className="button" style={{ display: this.state.avatar ? "" : "none" }} onClick={() => this.setState({ avatar: "" })}>Supprimer l'avatar</button>
-            </div>
 
-            <div className="buttons">
-                <button className="button">Enregistrer</button>
-                <button className="button">Supprimer mon compte</button>
-            </div>
+                <div>
+                    <span>Email :</span>
+                    <input type="text" ref={this.email} />
+                </div>
+
+                <div>
+                    <span>Mot de passe :</span>
+                    <input type="password" ref={this.password} placeholder="Laisser vide pour ne pas modifier" autoComplete="new-password" />
+                </div>
+
+                {this.state.password ? <div>
+                    <span>Retaper le mot de passe :</span>
+                    <input type="password" ref={this.passwordVerify} />
+                </div> : null}
+
+                <div className="avatar">
+                    <span>Avatar :</span>
+                    <input type="file" id="avatarInput" accept=".png, .jpg, .jpeg, .gif" onChange={async (event) => this.setState({ avatar: await toBase64(event.target.files[0]) })} />
+                    <div className="display" onClick={() => document.getElementById("avatarInput").click()}>
+                        <img src={this.state.avatar} className="avatar" alt="Changer d'avatar" />
+                        <span>Changer d'avatar</span>
+                    </div>
+                    <button className="button" style={{ display: this.state.avatar ? "" : "none" }} onClick={() => this.setState({ avatar: "" })}>Supprimer l'avatar</button>
+                </div>
+
+                <div className="buttons">
+                    <button disabled={this.state.requesting}>{this.state.editing ? "Sauvegarder" : "Modifier"}</button>
+                    <button disabled={this.state.requesting}>Supprimer mon compte</button>
+                </div>
+                */}
+            </div>}
         </div>;
     }
 }
-
-const toBase64 = (file) => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.addEventListener("load", () => resolve(reader.result));
-    reader.addEventListener("error", (error) => reject(error));
-});

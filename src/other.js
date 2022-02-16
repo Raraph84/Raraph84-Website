@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import { getUser } from "./api";
 
 export class Header extends Component {
 
@@ -11,19 +12,19 @@ export class Header extends Component {
     }
 
     componentDidMount() {
-        if (!localStorage.getItem("token")) return;
-        fetch("https://api.raraph84.ml/users/@me", { headers: { authorization: localStorage.getItem("token") } }).then((res) => res.json()).then((res) => {
-            if (res.code === 200)
-                this.setState({ user: { username: res.username, avatar: res.avatarUrl || res.defaultAvatarUrl } });
-            else if (res.code === 401)
+
+        if (!localStorage.getItem("token"))
+            return;
+
+        getUser("@me").then((user) => this.setState({ user })).catch((message) => {
+            if (message === "You must be logged") {
                 localStorage.removeItem("token");
+                document.location.assign("/");
+            }
         });
     }
 
     render() {
-
-        const toggleMenu = () => this.setState({ menu: !this.state.menu });
-
         return <div className="header">
 
             <Link to="/home" className="logo">
@@ -31,17 +32,17 @@ export class Header extends Component {
                 <span className="link">Raraph84</span>
             </Link>
 
-            {!this.state.user ?
-                <Link className="login" to="/login">Se connecter</Link> :
-                <div className="menu">
-                    <div className="user" onClick={toggleMenu}>
-                        <img src={this.state.user.avatar} alt=" " />
+            {!this.state.user
+                ? <Link className="login" to="/login">Se connecter</Link>
+                : <div className="menu" onClick={() => this.setState({ menu: !this.state.menu })}>
+                    <div className="user">
+                        <img src={this.state.user.avatarUrl} alt=" " />
                         <span>{this.state.user.username}</span>
                     </div>
-                    <div style={{ display: this.state.menu ? "" : "none" }}>
-                        <Link to="/account" onClick={toggleMenu}>Mon compte</Link>
-                        <Link to="/logout" onClick={toggleMenu} style={{ color: "red" }}>Se déconnecter</Link>
-                    </div>
+                    {!this.state.menu ? null : <div>
+                        <Link to="/account">Mon compte</Link>
+                        <Link to="/logout" style={{ color: "red" }}>Se déconnecter</Link>
+                    </div>}
                 </div>}
         </div>;
     }
@@ -68,12 +69,12 @@ export class NotFound extends Component {
 
 export class Info extends Component {
     render() {
-        return <div className="info" style={{ backgroundColor: this.props.color || "rgba(255, 0, 0, 0.25)" }}>{this.props.children}</div>
+        return <div className="info" style={{ backgroundColor: this.props.color || "rgba(255, 0, 0, 0.25)" }}>{this.props.children}</div>;
     }
 }
 
 export class Loading extends Component {
     render() {
-        return <div className="loading"><i className="fas fa-spinner" /></div>
+        return <div className="loading"><i className="fas fa-spinner" /></div>;
     }
 }
