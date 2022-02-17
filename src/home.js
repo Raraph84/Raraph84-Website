@@ -21,52 +21,38 @@ export class Home extends Component {
 
             <div className="subtitle">Mes projets</div>
             <div className="projects">
-                <a href="https://eclipsia.fr/" target="_blank" rel="noreferrer" className="box project">
-                    <div className="title link">Eclipsia</div>
-                    <img alt="Logo Eclipsia" src="/imgs/logo-eclipsia.png"></img>
-                    <div className="description">
-                        Eclipsia est un serveur Mini-Jeux créé par des amis.
-                    </div>
-                </a>
-                <a href="https://discord.gg/AKMzGb9" target="_blank" rel="noreferrer" className="box project">
-                    <div className="title link">DommiossGroup</div>
-                    <img alt="Logo DommiossGroup" src="/imgs/logo-dommiossgroup.png"></img>
-                    <div className="description">
-                        Le DommiossGroup est un groupe de projets web et Minecraft fondé en 2018, développant actuellement un CMS et un serveur Minecraft Roleplay.
-                    </div>
-                </a>
-                <a href="https://discord.gg/5vZxSUy" target="_blank" rel="noreferrer" className="box project">
-                    <div className="title link">Cubik Market</div>
-                    <img alt="Logo Cubik Market" src="/imgs/logo-cubik-market.png"></img>
-                    <div className="description">
-                        Le Cubik Market est un market Paladium entièrement réalisé sur Discord.
-                    </div>
-                </a>
-                <a href="https://discord.gg/HQKUWDe" target="_blank" rel="noreferrer" className="box project">
-                    <div className="title link">Discord Colonies</div>
-                    <img alt="Logo Discord Colonies" src="/imgs/logo-discord-colonies.png"></img>
-                    <div className="description">
-                        Serveur Discord où l'on peut créer son pays, farmer des ressources, coloniser etc.
-                    </div>
-                </a>
-                <a href="https://discord.gg/GWFzTcN" target="_blank" rel="noreferrer" className="box project">
-                    <div className="title link">Pala's Fun</div>
-                    <img alt="Logo Pala's Fun" src="/imgs/logo-palas-fun.png"></img>
-                    <div className="description">
-                        Bot Discord en rapport avec Paladium.
-                    </div>
-                </a>
+                <Project link="https://eclipsia.fr/" name="Eclipsia" imageUrl="/imgs/logo-eclipsia.png" description="Eclipsia est un serveur Minecraft Mini-Jeux créé par des amis." />
+                <Project link="https://discord.gg/AKMzGb9" name="DommiossGroup" imageUrl="/imgs/logo-dommiossgroup.png" description="Le DommiossGroup est un groupe de projets web et Minecraft fondé en 2018, développant actuellement un CMS et un serveur Minecraft Roleplay." />
+                <Project link="https://discord.gg/5vZxSUy" name="Cubik Market" imageUrl="/imgs/logo-cubik-market.png" description="Le Cubik Market est un market pour le serveur Minecraft Paladium entièrement réalisé et automatisé sur Discord." />
+                <Project link="https://discord.gg/HQKUWDe" name="Discord Colonies" imageUrl="/imgs/logo-discord-colonies.png" description="Discord Colonies est un serveur Discord où l'on peut créer son pays, farmer des ressources, coloniser etc." />
+                <Project link="https://discord.gg/GWFzTcN" name="Pala's Fun" imageUrl="/imgs/logo-palas-fun.png" description="Pala's Fun est un Bot Discord en rapport avec le serveur Minecraft Paladium." />
             </div>
 
-            <div className="subtitle">Me contacter</div>
-            <div className="contactme">
+            <div className="subtitle">Mes liens</div>
+            <div className="links">
                 <div>
                     Mon serveur Discord : <a href="https://discord.gg/MRjDxpx" target="_blank" rel="noreferrer"><span className="link">https://discord.gg/MRjDxpx</span></a>
+                </div>
+                <div>
+                    Mon GitHub : <a href="https://github.com/Raraph84" target="_blank" rel="noreferrer"><span className="link">https://github.com/Raraph84</span></a>
+                </div>
+                <div>
+                    Ma chaîne Youtube : <a href="https://youtube.com/channel/UCA0z90EeHObZqVu-Yx-SKeQ" target="_blank" rel="noreferrer"><span className="link">https://youtube.com/channel/UCA0z90EeHObZqVu-Yx-SKeQ</span></a>
                 </div>
                 <div>
                     Mon adresse Email : <a href="mailto:raraph84@gmail.com"><span className="link">raraph84@gmail.com</span></a>
                 </div>
             </div>
         </div>;
+    }
+}
+
+class Project extends Component {
+    render() {
+        return <a href={this.props.link} target="_blank" rel="noreferrer" className="box project">
+            <div className="title link">{this.props.name}</div>
+            <img alt={"Logo " + this.props.name} src={this.props.imageUrl}></img>
+            <div className="description">{this.props.description}</div>
+        </a>
     }
 }
