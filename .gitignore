@@ -1,7 +1,5 @@
 node_modules/
 package-lock.json
 yarn.lock
-deploy.bat
-
-# Oui, j'ai encore utilisé avec un éditeur différent
 .replit
+deploy.bat
