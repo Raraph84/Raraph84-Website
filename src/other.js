@@ -66,6 +66,16 @@ export class NotFound extends Component {
     }
 }
 
+export class Unavailable extends Component {
+    render() {
+        document.title = "Maintenance | Raraph84";
+        return <div>
+            <div className="title">Maintenace</div>
+            <div className="subtitle">Le site est actuellement indisponible.</div>
+        </div>;
+    }
+}
+
 export class Info extends Component {
     render() {
         return <div className="info" style={{ backgroundColor: this.props.color || "rgba(255, 0, 0, 0.25)" }}>{this.props.children}</div>
