@@ -1,4 +1,4 @@
-export const HOST = "https://api.raraph84.ml";
+export const HOST = "https://api.raraph.fr";
 
 export const login = async (username, password) => new Promise((resolve, reject) => {
 

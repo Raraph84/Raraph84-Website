@@ -83,11 +83,11 @@ export class Heberg extends Component {
 
     connectLogs() {
 
-        this.log("[Raraph84.ml] Connexion...");
-        this.ws = new WebSocket("wss://gateway.hebergs.primordium.fr/");
+        this.log("[raraph.fr] Connexion...");
+        this.ws = new WebSocket("wss://gateway.raraph.fr/hebergs");
 
         this.ws.addEventListener("open", () => {
-            this.log("[Raraph84.ml] Connecté");
+            this.log("[raraph.fr] Connecté");
             this.ws.send(JSON.stringify({ type: "logs", token: localStorage.getItem("token"), id: this.id }));
         });
 
@@ -106,7 +106,7 @@ export class Heberg extends Component {
         });
 
         this.ws.addEventListener("close", () => {
-            this.log("[Raraph84.ml] Déconnecté ! Reconnexion...");
+            this.log("[raraph.fr] Déconnecté ! Reconnexion...");
             setTimeout(() => this.connectLogs(), 1000);
         });
     }
