@@ -64,6 +64,7 @@ body {
 .header {
     display: flex;
     background-color: rgb(100, 100, 100);
+    height: var(--header-height);
 
     .logo {
         display: flex;
@@ -173,6 +174,7 @@ body {
     display: flex;
     box-sizing: border-box;
     width: 100%;
+    height: var(--footer-height);
     padding: 15px;
     background-color: rgb(40, 40, 40);
 
