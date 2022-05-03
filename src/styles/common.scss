@@ -58,7 +58,7 @@ body {
     background-color: rgb(50, 50, 50);
     color: white;
     --header-height: 85px;
-    --footer-height: 0px;
+    --footer-height: 30px;
 }
 
 .header {
@@ -170,10 +170,26 @@ body {
 }
 
 .footer {
+    display: flex;
     box-sizing: border-box;
     width: 100%;
     padding: 15px;
     background-color: rgb(40, 40, 40);
+
+    .links {
+        margin: auto;
+
+        a {
+            font-size: 25px;
+            margin: auto 5px;
+            transition-property: color;
+            transition-duration: 150ms;
+
+            &:hover {
+                color: rgb(175, 175, 175);
+            }
+        }
+    }
 }
 
 .box {
