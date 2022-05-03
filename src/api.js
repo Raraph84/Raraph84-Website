@@ -1,4 +1,4 @@
-export const HOST = "https://api.raraph.fr";
+export const HOST = process.env.NODE_ENV === "production" ? "https://api.raraph.fr" : "http://localhost:8080";
 
 export const login = async (username, password) => new Promise((resolve, reject) => {
 
@@ -11,11 +11,11 @@ export const login = async (username, password) => new Promise((resolve, reject)
     }).catch((error) => reject(error));
 });
 
-export const createAccount = async (username, email, password, acceptCgu) => new Promise((resolve, reject) => {
+export const createAccount = async (username, email, password) => new Promise((resolve, reject) => {
 
     fetch(HOST + "/createAccount", {
         method: "POST",
-        body: JSON.stringify({ username, email, password, acceptCgu })
+        body: JSON.stringify({ username, email, password })
     }).then((res) => {
         if (res.ok) res.json().then((res) => resolve(res.token)).catch((error) => reject(error));
         else res.json().then((res) => reject(res.message)).catch((error) => reject(error));

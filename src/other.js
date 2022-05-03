@@ -17,7 +17,7 @@ export class Header extends Component {
             return;
 
         getUser("@me").then((user) => this.setState({ user })).catch((message) => {
-            if (message === "You must be logged") {
+            if (message === "Invalid token") {
                 localStorage.removeItem("token");
                 document.location.assign("/");
             }
@@ -36,7 +36,7 @@ export class Header extends Component {
                 ? <Link className="login" to="/login">Se connecter</Link>
                 : <div className="menu" onClick={() => this.setState({ menu: !this.state.menu })}>
                     <div className="user">
-                        <img src={this.state.user.avatarUrl} alt=" " />
+                        <img src={this.state.user.avatarUrl || this.state.user.defaultAvatarUrl} alt=" " />
                         <span>{this.state.user.username}</span>
                     </div>
                     {!this.state.menu ? null : <div>

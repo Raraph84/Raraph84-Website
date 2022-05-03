@@ -143,7 +143,7 @@ export class Register extends Component {
             </div>
 
             <div>
-                <div className="hint">J'ai lu et accepté les <Link to="/cgu"><span className="link">conditions générales d'utilisation</span></Link> :</div>
+                <div className="hint">J'ai lu et accepté les <a href="https://youtu.be/dQw4w9WgXcQ"><span className="link">conditions générales d'utilisation</span></a> :</div>
                 <input type="checkbox" ref={this.cgu} disabled={this.state.requesting} />
             </div>
 
@@ -205,12 +205,14 @@ export class Account extends Component {
         this.passwordVerify = createRef();
         this.avatar = createRef();
 
-        this.state = { requesting: false, info: null, me: null, editing: false };
+        this.state = { requesting: false, info: null, user: null, editing: false };
     }
 
     componentDidMount() {
-        getUser("@me").then((me) => this.setState({ me })).catch((message) => {
-            if (message === "You must be logged") {
+
+        this.setState({ requesting: true });
+        getUser("@me").then((user) => this.setState({ requesting: false, user })).catch((message) => {
+            if (message === "Invalid token") {
                 localStorage.removeItem("token");
                 document.location.assign("/");
             } else this.setState({ requesting: false, info: <Info>Un problème est survenu !</Info> });
@@ -222,12 +224,12 @@ export class Account extends Component {
         document.title = "Mon compte | Raraph84";
 
         return <div className="account">
-            <div className="title">Mon compte</div>
+            <div className="title">{document.title}</div>
 
             {this.state.requesting ? <Loading /> : null}
             {this.state.info}
 
-            {!this.state.me ? null : <div>
+            {!this.state.user ? null : <div>
                 En développement !
                 {/*
                 <div>

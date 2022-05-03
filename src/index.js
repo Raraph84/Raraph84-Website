@@ -1,6 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Home } from "./home";
 import { Account, Login, Logout, Register } from "./account";
@@ -17,19 +17,19 @@ class Website extends React.Component {
             <div className="content">
                 {MAINTENANCE
                     ? <Unavailable />
-                    : <Switch>
-                        <Route exact path="/"><Home /></Route>
-                        <Route exact path="/home"><Home /></Route>
-                        <Route exact path="/login"><Login /></Route>
-                        <Route exact path="/logout"><Logout /></Route>
-                        <Route exact path="/register"><Register /></Route>
-                        <Route exact path="/account"><Account /></Route>
-                        <Route path="*"><NotFound /></Route>
-                    </Switch>}
+                    : <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/home" element={<Home />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/logout" element={<Logout />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/account" element={<Account />} />
+                        <Route path="*" element={<NotFound />} />
+                    </Routes>}
             </div>
             <Footer />
         </BrowserRouter>;
     }
 }
 
-ReactDOM.render(<React.StrictMode><Website /></React.StrictMode>, document.getElementById("root"));
+createRoot(document.getElementById("root")).render(<Website />);
