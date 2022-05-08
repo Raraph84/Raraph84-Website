@@ -13,7 +13,7 @@ export const login = async (username, password) => new Promise((resolve, reject)
 
 export const createAccount = async (username, email, password) => new Promise((resolve, reject) => {
 
-    fetch(HOST + "/createAccount", {
+    fetch(HOST + "/users", {
         method: "POST",
         body: JSON.stringify({ username, email, password })
     }).then((res) => {

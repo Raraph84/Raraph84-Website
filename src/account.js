@@ -37,7 +37,7 @@ export class Login extends Component {
                 info: {
                     missing_username: <Info>Veuillez saisir un nom d'utilisateur ou une adresse email !</Info>,
                     missing_password: <Info>Veuillez saisir un mot de passe !</Info>,
-                    too_many_login_fails: <Info>Trop d'essais de connexion, réessayez plus tard !</Info>,
+                    too_many_fails: <Info>Trop d'essais de connexion, réessayez plus tard !</Info>,
                     invalid_username_or_password: <Info>Le nom d'utilisateur ou le mot de passe est incorrect !</Info>
                 }[typeof message === "string" ? message.toLowerCase().replace(/ /g, '_') : ""] || <Info>Un problème est survenu !</Info>
             }));
