@@ -37,7 +37,7 @@ export class Login extends Component {
                 info: {
                     missing_username: <Info>Veuillez saisir un nom d'utilisateur ou une adresse email !</Info>,
                     missing_password: <Info>Veuillez saisir un mot de passe !</Info>,
-                    too_many_fails: <Info>Trop d'essais de connexion, réessayez plus tard !</Info>,
+                    too_many_fails: <Info>Trop de tentatives, réessayez plus tard !</Info>,
                     invalid_username_or_password: <Info>Le nom d'utilisateur ou le mot de passe est incorrect !</Info>
                 }[typeof message === "string" ? message.toLowerCase().replace(/ /g, '_') : ""] || <Info>Un problème est survenu !</Info>
             }));
@@ -108,8 +108,7 @@ export class Register extends Component {
                     missing_email: <Info>Veuillez saisir une adresse email !</Info>,
                     invalid_email: <Info>Veuillez saisir une adresse email valide !</Info>,
                     missing_password: <Info>Veuillez saisir un mot de passe !</Info>,
-                    you_must_accept_cgu: <Info>Vous devez lire et accepter les conditions générales d'utilisation !</Info>,
-                    too_many_account_creations: <Info>Trop de créations de comptes, réessaye plus tard !</Info>,
+                    too_many_creations: <Info>Trop de créations de comptes, réessayez plus tard !</Info>,
                     username_already_exists: <Info>Ce nom d'utilisateur est déjà utilisé !</Info>,
                     email_already_exists: <Info>Cette adresse email est déjà utilisé !</Info>
                 }[typeof message === "string" ? message.toLowerCase().replace(/ /g, '_') : ""] || <Info>Un problème est survenu !</Info>
