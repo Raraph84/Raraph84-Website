@@ -1,5 +1,6 @@
 .login {
-    button {
+    .button {
+        margin: auto;
         margin-top: 7px;
         margin-bottom: 15px;
     }
@@ -9,7 +10,7 @@
     .avatar {
         display: inline-flex;
 
-        > span {
+        >span {
             margin: auto 5px;
         }
 
@@ -58,7 +59,7 @@
         margin: 15px 5px;
     }
 
-    div > span {
+    div>span {
         margin-right: 5px;
     }
 }

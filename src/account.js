@@ -51,7 +51,7 @@ export class Login extends Component {
 
             <div>
                 <span className="hint">Nom d'utilisateur/Email :</span>
-                <input type="text" ref={this.username} autoFocus disabled={this.state.requesting} onKeyPress={(event) => { if (event.code === "Enter") this.password.current.focus(); }} />
+                <input type="text" ref={this.username} disabled={this.state.requesting} autoFocus onKeyPress={(event) => { if (event.code === "Enter") this.password.current.focus(); }} />
             </div>
 
             <div>
@@ -59,9 +59,9 @@ export class Login extends Component {
                 <input type="password" ref={this.password} disabled={this.state.requesting} onKeyPress={(event) => { if (event.code === "Enter") processLogin() }} />
             </div>
 
-            <div><button disabled={this.state.requesting} onClick={processLogin}>Se connecter</button></div>
+            <button disabled={this.state.requesting} onClick={processLogin} className="button">Se connecter</button>
 
-            <Link to="/register"><span className="link">Je n'ai pas de compte</span></Link>
+            <Link to="/register" className="link">Je n'ai pas de compte</Link>
         </div>;
     }
 }
@@ -146,9 +146,9 @@ export class Register extends Component {
                 <input type="checkbox" ref={this.cgu} disabled={this.state.requesting} />
             </div>
 
-            <div><button onClick={processCreateAccount}>Créer le compte</button></div>
+            <button onClick={processCreateAccount} className="button">Créer le compte</button>
 
-            <Link to="/login"><span className="link">J'ai déjà un compte</span></Link>
+            <Link to="/login" className="link">J'ai déjà un compte</Link>
         </div>;
     }
 }

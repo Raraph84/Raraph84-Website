@@ -8,7 +8,7 @@ export class Header extends Component {
 
         super(props);
 
-        this.state = { user: null, menu: false };
+        this.state = { user: null, menu: false, hostingMenu: false };
     }
 
     componentDidMount() {
@@ -27,10 +27,20 @@ export class Header extends Component {
     render() {
         return <div className="header">
 
-            <Link to="/home" className="logo">
+            <Link to="/home" className="logo link-container">
                 <img src="/imgs/logo.png" alt="Logo" />
                 <span className="link">Raraph84</span>
             </Link>
+
+            {/*<div className="linksmenu">
+                <div className="link">Service d'hébergement</div>
+                {!this.state.hostingMenu ? null : <div className="links">
+                    <Link to="/hosting/nodejs">NodeJS</Link>
+                    <Link to="/hosting/python">Python</Link>
+                    <Link to="/hosting/website">Site web</Link>
+                    <Link to="/hosting/kvmvps">VPS KVM</Link>
+                </div>}
+            </div>*/}
 
             {!this.state.user
                 ? <Link className="login" to="/login">Se connecter</Link>
@@ -68,10 +78,10 @@ export class NotFound extends Component {
 
         document.title = "Page introuvable | Raraph84";
 
-        return <div>
+        return <div className="notfound">
             <div className="title">Tu es perdu ?</div>
             <div className="subtitle">Cette page n'existe pas (ou pas encore)</div>
-            <Link to="/home"><button>Revenir sur la page principale</button></Link>
+            <Link to="/home" className="button">Revenir sur la page principale</Link>
         </div>;
     }
 }
