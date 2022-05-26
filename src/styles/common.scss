@@ -79,6 +79,39 @@ body {
         }
     }
 
+    .linksmenu {
+        display: block;
+        margin: auto 10px;
+        margin-top: calc(var(--header-height) / 2 - 42px / 2);
+        padding: 10px;
+        border-radius: 10px;
+        transition-duration: 150ms;
+        transition-property: background-color;
+
+        &.active {
+            background-color: rgb(75, 75, 75);
+        }
+
+        button {
+            padding: 0;
+            background-color: transparent;
+            color: white;
+            font-size: 18px;
+            border-width: 0;
+        }
+
+        .links {
+            margin-top: 10px;
+
+            a {
+                display: block;
+                width: max-content;
+                margin: 5px 10px;
+                font-size: 18px;
+            }
+        }
+    }
+
     .login {
         margin: auto;
         margin-right: 15px;

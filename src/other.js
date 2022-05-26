@@ -25,6 +25,9 @@ export class Header extends Component {
     }
 
     render() {
+
+        const toggleHostingMenu = () => this.setState({ hostingMenu: !this.state.hostingMenu });
+
         return <div className="header">
 
             <Link to="/home" className="logo link-container">
@@ -32,15 +35,15 @@ export class Header extends Component {
                 <span className="link">Raraph84</span>
             </Link>
 
-            {/*<div className="linksmenu">
-                <div className="link">Service d'hébergement</div>
+            <div className={"linksmenu" + (this.state.hostingMenu ? " active" : "")}>
+                <button className="link" onClick={toggleHostingMenu}>Service d'hébergement <i className="fa-solid fa-caret-down" /></button>
                 {!this.state.hostingMenu ? null : <div className="links">
-                    <Link to="/hosting/nodejs">NodeJS</Link>
-                    <Link to="/hosting/python">Python</Link>
-                    <Link to="/hosting/website">Site web</Link>
-                    <Link to="/hosting/kvmvps">VPS KVM</Link>
+                    <Link to="/hosting/nodejs" className="link" onClick={toggleHostingMenu}>NodeJS</Link>
+                    <Link to="/hosting/python" className="link" onClick={toggleHostingMenu}>Python</Link>
+                    <Link to="/hosting/website" className="link" onClick={toggleHostingMenu}>Site web</Link>
+                    <Link to="/hosting/kvmvps" className="link" onClick={toggleHostingMenu}>VPS KVM</Link>
                 </div>}
-            </div>*/}
+            </div>
 
             {!this.state.user
                 ? <Link className="login" to="/login">Se connecter</Link>
