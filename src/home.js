@@ -35,8 +35,8 @@ class Project extends Component {
     render() {
         return <a href={this.props.link} target="_blank" rel="noreferrer" className="box link-container">
             <div className="box-title link">{this.props.name}</div>
-            <img alt={"Logo "} src={this.props.imageUrl}></img>
-            <div className="description">{this.props.description}</div>
+            <img alt="Logo" src={this.props.imageUrl}></img>
+            <div>{this.props.description}</div>
         </a>
     }
 }

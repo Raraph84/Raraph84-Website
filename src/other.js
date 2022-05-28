@@ -43,6 +43,7 @@ export class Header extends Component {
                     <Link to="/hosting/nodejs" className="link" onClick={toggleHostingMenu}>NodeJS</Link>
                     <Link to="/hosting/python" className="link" onClick={toggleHostingMenu}>Python</Link>
                     <Link to="/hosting/website" className="link" onClick={toggleHostingMenu}>Site web</Link>
+                    <Link to="/hosting/database" className="link" onClick={toggleHostingMenu}>Base de donnée</Link>
                     <Link to="/hosting/kvmvps" className="link" onClick={toggleHostingMenu}>VPS KVM</Link>
                 </div>}
             </div>
