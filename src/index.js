@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Home } from "./home";
+import Hosting from "./hosting/hosting";
 import { Account, Login, Logout, Register } from "./account";
 import { Footer, Header, NotFound, Unavailable } from "./other";
 
@@ -20,6 +21,7 @@ class Website extends React.Component {
                     : <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/home" element={<Home />} />
+                        <Route path="/hosting" element={<Hosting />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/logout" element={<Logout />} />
                         <Route path="/register" element={<Register />} />

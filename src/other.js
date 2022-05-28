@@ -38,6 +38,8 @@ export class Header extends Component {
             <div className={"linksmenu" + (this.state.hostingMenu ? " active" : "")}>
                 <button className="link" onClick={toggleHostingMenu}>Service d'hébergement <i className="fa-solid fa-caret-down" /></button>
                 {!this.state.hostingMenu ? null : <div className="links">
+                    <Link to="/hosting/minecraft" className="link" onClick={toggleHostingMenu}>Minecraft</Link>
+                    <Link to="/hosting/bungeecord" className="link" onClick={toggleHostingMenu}>BungeeCord</Link>
                     <Link to="/hosting/nodejs" className="link" onClick={toggleHostingMenu}>NodeJS</Link>
                     <Link to="/hosting/python" className="link" onClick={toggleHostingMenu}>Python</Link>
                     <Link to="/hosting/website" className="link" onClick={toggleHostingMenu}>Site web</Link>
