@@ -50,8 +50,13 @@
     }
 }
 
-body {
+* {
+    box-sizing: border-box;
+    padding: 0;
     margin: 0;
+}
+
+body {
     font-family: sans-serif;
     background-color: rgb(50, 50, 50);
     color: white;
@@ -63,53 +68,72 @@ body {
     display: flex;
     background-color: rgb(100, 100, 100);
     height: var(--header-height);
+    white-space: nowrap;
 
     .logo {
         display: flex;
 
         img {
-            padding: 5px;
+            margin: 5px;
             height: 75px;
         }
 
         span {
-            margin: auto 10px;
+            margin: auto 5px;
             color: white;
-            font-size: 30px;
+            font-size: 28px;
         }
     }
 
-    .linksmenu {
-        display: block;
-        margin: auto 10px;
-        margin-top: calc(var(--header-height) / 2 - 42px / 2);
-        padding: 10px;
-        border-radius: 10px;
-        transition-duration: 150ms;
-        transition-property: background-color;
-        z-index: 1;
+    .links {
+        display: flex;
+        margin: 0 5px;
 
-        &.active {
-            background-color: rgb(75, 75, 75);
-            box-shadow: 3px 3px 5px black;
+        a {
+            margin: auto 5px;
+            font-size: 18px;
         }
 
         button {
-            padding: 0;
-            background-color: transparent;
-            color: white;
             font-size: 18px;
-            border-width: 0;
         }
 
-        .links {
-            margin-top: 10px;
+        .dropdown {
+            margin-top: calc(var(--header-height) / 2 - 41px / 2);
+            margin-bottom: auto;
+            border-radius: 10px;
+            z-index: 1;
+            transition-duration: 250ms;
+            transition-property: background-color, box-shadow, margin;
 
-            a {
-                display: block;
-                width: max-content;
-                margin: 5px 10px;
-                font-size: 18px;
+            button {
+                margin: 10px 5px;
+                transition-duration: 250ms;
+                transition-property: margin;
+            }
+
+            &.active {
+                background-color: rgb(75, 75, 75);
+                box-shadow: 3px 3px 5px black;
+                margin-left: 5px;
+                margin-right: 5px;
+
+                button {
+                    margin: 10px;
+                    margin-bottom: 5px;
+                }
+            }
+
+            .dropdown-content {
+                margin: 10px;
+                margin-top: 0;
+
+                a {
+                    display: block;
+                    width: max-content;
+                    margin: 5px;
+                    font-size: 17px;
+                }
             }
         }
     }
@@ -183,7 +207,7 @@ body {
     text-align: center;
     padding: 30px;
     font-size: 18px;
-    min-height: calc(100vh - (var(--header-height) + var(--footer-height) + 30px * 2));
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
 
     .title {
         display: block;
@@ -252,11 +276,9 @@ body {
 
 .button {
     display: block;
-    padding: 8px 12px;
+    padding: 8px;
     background-color: rgb(100, 100, 100);
-    color: white;
     font-size: 18px;
-    border-width: 0;
     border-radius: 10px;
     transition-duration: 150ms;
     transition-property: background-color, transform;
@@ -301,6 +323,10 @@ a {
 
 button {
     cursor: pointer;
+    color: white;
+    font-family: sans-serif;
+    background-color: transparent;
+    border-width: 0;
 }
 
 .link {
