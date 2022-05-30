@@ -8,7 +8,7 @@ export class Header extends Component {
 
         super(props);
 
-        this.state = { user: null, menu: false, hostingMenu: false };
+        this.state = { user: null, menu: false };
     }
 
     componentDidMount() {
@@ -26,8 +26,6 @@ export class Header extends Component {
 
     render() {
 
-        const toggleHostingMenu = () => this.setState({ hostingMenu: !this.state.hostingMenu });
-
         return <div className="header">
 
             <Link to="/home" className="logo link-container">
@@ -37,17 +35,17 @@ export class Header extends Component {
 
             <div className="links">
                 <Link to="/home" className="link">Accueil</Link>
-                <div className={"dropdown" + (this.state.hostingMenu ? " active" : "")}>
-                    <button className="link" onClick={toggleHostingMenu}>Service d'hébergement <i className="fa-solid fa-caret-down" /></button>
-                    {!this.state.hostingMenu ? null : <div className="dropdown-content">
-                        <Link to="/hosting/minecraft" className="link" onClick={toggleHostingMenu}>Minecraft</Link>
-                        <Link to="/hosting/bungeecord" className="link" onClick={toggleHostingMenu}>BungeeCord</Link>
-                        <Link to="/hosting/nodejs" className="link" onClick={toggleHostingMenu}>NodeJS</Link>
-                        <Link to="/hosting/python" className="link" onClick={toggleHostingMenu}>Python</Link>
-                        <Link to="/hosting/website" className="link" onClick={toggleHostingMenu}>Site web</Link>
-                        <Link to="/hosting/database" className="link" onClick={toggleHostingMenu}>Base de donnée</Link>
-                        <Link to="/hosting/kvmvps" className="link" onClick={toggleHostingMenu}>VPS KVM</Link>
-                    </div>}
+                <div className="dropdown">
+                    <Link to="/hosting" className="link">Service d'hébergement <i className="fa-solid fa-caret-down" /></Link>
+                    <div className="dropdown-content">
+                        <Link to="/hosting/minecraft" className="link">Minecraft</Link>
+                        <Link to="/hosting/bungeecord" className="link">BungeeCord</Link>
+                        <Link to="/hosting/nodejs" className="link">NodeJS</Link>
+                        <Link to="/hosting/python" className="link">Python</Link>
+                        <Link to="/hosting/website" className="link">Site web</Link>
+                        <Link to="/hosting/database" className="link">Base de donnée</Link>
+                        <Link to="/hosting/kvmvps" className="link">VPS KVM</Link>
+                    </div>
                 </div>
             </div>
 

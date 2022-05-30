@@ -94,10 +94,6 @@ body {
             font-size: 18px;
         }
 
-        button {
-            font-size: 18px;
-        }
-
         .dropdown {
             margin-top: calc(var(--header-height) / 2 - 41px / 2);
             margin-bottom: auto;
@@ -106,33 +102,37 @@ body {
             transition-duration: 250ms;
             transition-property: background-color, box-shadow, margin;
 
-            button {
+            >a {
+                display: block;
                 margin: 10px 5px;
                 transition-duration: 250ms;
                 transition-property: margin;
             }
 
-            &.active {
+            .dropdown-content {
+                display: none;
+                margin: 10px 10px 10px 10px;
+
+                >a {
+                    display: block;
+                    width: max-content;
+                    margin: 5px;
+                    font-size: 17px;
+                }
+            }
+
+            &:hover {
                 background-color: rgb(75, 75, 75);
                 box-shadow: 3px 3px 5px black;
                 margin-left: 5px;
                 margin-right: 5px;
 
-                button {
+                >a {
                     margin: 10px;
-                    margin-bottom: 5px;
                 }
-            }
 
-            .dropdown-content {
-                margin: 10px;
-                margin-top: 0;
-
-                a {
+                .dropdown-content {
                     display: block;
-                    width: max-content;
-                    margin: 5px;
-                    font-size: 17px;
                 }
             }
         }
@@ -227,7 +227,6 @@ body {
 
 .footer {
     display: flex;
-    box-sizing: border-box;
     width: 100%;
     height: var(--footer-height);
     padding: 15px;
