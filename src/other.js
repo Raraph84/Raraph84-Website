@@ -70,11 +70,17 @@ export class Footer extends Component {
         return <div className="footer">
 
             <div className="links">
+                <div>Mes réseaux</div>
                 <a href="https://discord.gg/MRjDxpx" target="_blank" rel="noreferrer"><i className="fa-brands fa-discord"></i></a>
                 <a href="https://github.com/Raraph84" target="_blank" rel="noreferrer"><i className="fa-brands fa-github"></i></a>
                 <a href="https://youtube.com/channel/UCA0z90EeHObZqVu-Yx-SKeQ" target="_blank" rel="noreferrer"><i className="fa-brands fa-youtube"></i></a>
                 <a href="https://twitter.com/Raraph84" target="_blank" rel="noreferrer"><i className="fa-brands fa-twitter"></i></a>
                 <a href="mailto:raraph84@gmail.com"><i className="fa-solid fa-envelope"></i></a>
+            </div>
+
+            <div className="links">
+                <div>Autres liens</div>
+                <a href="https://docs.api.raraph.fr" className="link">Documentation API</a>
             </div>
         </div>;
     }

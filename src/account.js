@@ -135,7 +135,7 @@ export class Register extends Component {
 
                 <div>
                     <span className="hint">Email :</span>
-                    <input type="text" ref={this.email} disabled={this.state.requesting} maxLength={75} autoFocus />
+                    <input type="text" ref={this.email} disabled={this.state.requesting} maxLength={75} autoFocus onKeyPress={(event) => { if (event.code === "Enter") sendVerificationEmail(); }} />
                 </div>
 
                 <div>
@@ -151,17 +151,17 @@ export class Register extends Component {
 
                 <div>
                     <span className="hint">Nom d'utilisateur :</span>
-                    <input type="text" ref={this.username} disabled={this.state.requesting} maxLength={25} autoFocus />
+                    <input type="text" ref={this.username} disabled={this.state.requesting} maxLength={25} autoFocus onKeyPress={(event) => { if (event.code === "Enter") this.password.current.focus(); }} />
                 </div>
 
                 <div>
                     <span className="hint">Mot de passe :</span>
-                    <input type="password" ref={this.password} disabled={this.state.requesting} />
+                    <input type="password" ref={this.password} disabled={this.state.requesting} onKeyPress={(event) => { if (event.code === "Enter") this.passwordVerify.current.focus(); }} />
                 </div>
 
                 <div>
                     <span className="hint">Retaper le mot de passe :</span>
-                    <input type="password" ref={this.passwordVerify} disabled={this.state.requesting} />
+                    <input type="password" ref={this.passwordVerify} disabled={this.state.requesting} onKeyPress={(event) => { if (event.code === "Enter") createAccount(); }} />
                 </div>
 
                 <button disabled={this.state.requesting} onClick={createAccount} className="button">Créer le compte</button>
