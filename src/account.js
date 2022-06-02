@@ -1,7 +1,7 @@
 import { Component, createRef } from "react";
 import { Link } from "react-router-dom";
 import { Info, Loading } from "./other";
-import { login, createAccount, logout, getUser } from "./api";
+import { login, createAccountP1, createAccountP2, logout, getUser } from "./api";
 
 import "./styles/account.scss";
 
@@ -22,11 +22,6 @@ export class Login extends Component {
         document.title = "Connexion | Raraph84";
 
         const processLogin = () => {
-
-            if (localStorage.getItem("token")) {
-                this.setState({ info: <Info>Vous êtes déjà connecté !</Info> });
-                return;
-            }
 
             this.setState({ requesting: true, info: null });
             login(this.username.current.value, this.password.current.value).then((token) => {
@@ -72,25 +67,44 @@ export class Register extends Component {
 
         super(props);
 
-        this.username = createRef();
         this.email = createRef();
-        this.password = createRef();
-        this.passwordVerify = createRef();
         this.cgu = createRef();
 
-        this.state = { requesting: false, info: null };
+        this.username = createRef();
+        this.password = createRef();
+        this.passwordVerify = createRef();
+
+        const params = new URLSearchParams(document.location.search);
+
+        this.state = { requesting: false, info: null, code: params.get("code") || null };
     }
 
     render() {
 
         document.title = "Créer un compte | Raraph84";
 
-        const processCreateAccount = () => {
+        const sendVerificationEmail = () => {
 
-            if (localStorage.getItem("token")) {
-                this.setState({ info: <Info>Vous êtes déjà connecté !</Info> });
+            if (!this.cgu.current.checked) {
+                this.setState({ info: <Info>Veuillez accepter les conditions générales d'utilisation !</Info> });
                 return;
             }
+
+            this.setState({ requesting: true, info: null });
+            createAccountP1(this.email.current.value).then(() => {
+                this.setState({ requesting: false, info: <Info color="rgba(0, 255, 0, 0.25)">Un email de confirmation vous a été envoyé !</Info> });
+            }).catch((message) => this.setState({
+                requesting: false,
+                info: {
+                    email_too_long: <Info>Cette adresse email est trop longue !</Info>,
+                    invalid_email: <Info>Cette adresse email est invalide !</Info>,
+                    email_already_used: <Info>Cette adresse email est déjà utilisée !</Info>,
+                    too_many_creations: <Info>Trop de créations de comptes, réessayez plus tard !</Info>
+                }[typeof message === "string" ? message.toLowerCase().replace(/ /g, '_') : ""] || <Info>Un problème est survenu !</Info>
+            }));
+        }
+
+        const createAccount = () => {
 
             if (this.password.current.value !== this.passwordVerify.current.value) {
                 this.setState({ info: <Info>Les mots de passe ne correspondent pas !</Info> });
@@ -98,19 +112,15 @@ export class Register extends Component {
             }
 
             this.setState({ requesting: true, info: null });
-            createAccount(this.username.current.value, this.email.current.value, this.password.current.value, this.cgu.current.checked).then((token) => {
+            createAccountP2(this.state.code, this.username.current.value, this.password.current.value).then((token) => {
                 localStorage.setItem("token", token);
                 document.location.assign("/");
             }).catch((message) => this.setState({
                 requesting: false,
                 info: {
-                    missing_username: <Info>Veuillez saisir un nom d'utilisateur !</Info>,
-                    missing_email: <Info>Veuillez saisir une adresse email !</Info>,
-                    invalid_email: <Info>Veuillez saisir une adresse email valide !</Info>,
-                    missing_password: <Info>Veuillez saisir un mot de passe !</Info>,
-                    too_many_creations: <Info>Trop de créations de comptes, réessayez plus tard !</Info>,
-                    username_already_exists: <Info>Ce nom d'utilisateur est déjà utilisé !</Info>,
-                    email_already_exists: <Info>Cette adresse email est déjà utilisé !</Info>
+                    invalid_or_expired_code: <Info>Code invalide ou expiré !</Info>,
+                    username_already_used: <Info>Ce nom d'utilisateur est déjà utilisé !</Info>,
+                    too_many_creations: <Info>Trop de créations de comptes, réessayez plus tard !</Info>
                 }[typeof message === "string" ? message.toLowerCase().replace(/ /g, '_') : ""] || <Info>Un problème est survenu !</Info>
             }));
         }
@@ -121,34 +131,41 @@ export class Register extends Component {
             {this.state.requesting ? <Loading /> : null}
             {this.state.info}
 
-            <div>
-                <span className="hint">Nom d'utilisateur :</span>
-                <input type="text" ref={this.username} autoFocus disabled={this.state.requesting} maxLength={25} />
-            </div>
+            {!this.state.code ? <div>
 
-            <div>
-                <span className="hint">Email :</span>
-                <input type="text" ref={this.email} disabled={this.state.requesting} />
-            </div>
+                <div>
+                    <span className="hint">Email :</span>
+                    <input type="text" ref={this.email} disabled={this.state.requesting} maxLength={75} autoFocus />
+                </div>
 
-            <div>
-                <span className="hint">Mot de passe :</span>
-                <input type="password" ref={this.password} disabled={this.state.requesting} />
-            </div>
+                <div>
+                    <div className="hint">J'ai lu et accepté les <a href="https://youtu.be/dQw4w9WgXcQ" className="link">conditions générales d'utilisation</a> :</div>
+                    <input type="checkbox" ref={this.cgu} disabled={this.state.requesting} />
+                </div>
 
-            <div>
-                <span className="hint">Retaper le mot de passe :</span>
-                <input type="password" ref={this.passwordVerify} disabled={this.state.requesting} />
-            </div>
+                <button disabled={this.state.requesting} onClick={sendVerificationEmail} className="button">Envoyer un email de vérification</button>
 
-            <div>
-                <div className="hint">J'ai lu et accepté les <a href="https://youtu.be/dQw4w9WgXcQ"><span className="link">conditions générales d'utilisation</span></a> :</div>
-                <input type="checkbox" ref={this.cgu} disabled={this.state.requesting} />
-            </div>
+                <Link to="/login" className="link">J'ai déjà un compte</Link>
 
-            <button onClick={processCreateAccount} className="button">Créer le compte</button>
+            </div> : <div>
 
-            <Link to="/login" className="link">J'ai déjà un compte</Link>
+                <div>
+                    <span className="hint">Nom d'utilisateur :</span>
+                    <input type="text" ref={this.username} disabled={this.state.requesting} maxLength={25} autoFocus />
+                </div>
+
+                <div>
+                    <span className="hint">Mot de passe :</span>
+                    <input type="password" ref={this.password} disabled={this.state.requesting} />
+                </div>
+
+                <div>
+                    <span className="hint">Retaper le mot de passe :</span>
+                    <input type="password" ref={this.passwordVerify} disabled={this.state.requesting} />
+                </div>
+
+                <button disabled={this.state.requesting} onClick={createAccount} className="button">Créer le compte</button>
+            </div>}
         </div>;
     }
 }
