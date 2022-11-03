@@ -60,14 +60,11 @@ body {
     font-family: sans-serif;
     background-color: rgb(50, 50, 50);
     color: white;
-    --header-height: 85px;
-    --footer-height: 89.5px;
 }
 
 .header {
     display: flex;
     background-color: rgb(100, 100, 100);
-    height: var(--header-height);
     white-space: nowrap;
 
     .logo {
@@ -87,52 +84,53 @@ body {
 
     .links {
         display: flex;
-        margin: 0 5px;
+        align-items: center;
+        margin: 0 10px;
+        gap: 10px;
 
         a {
-            margin: auto 5px;
+            display: block;
             font-size: 18px;
         }
 
-        .dropdown {
-            margin-top: calc(var(--header-height) / 2 - 41px / 2);
-            margin-bottom: auto;
-            border-radius: 10px;
-            z-index: 1;
-            transition-duration: 250ms;
-            transition-property: background-color, box-shadow, margin;
+        .dropdown-container {
 
-            >a {
-                display: block;
-                margin: 10px 5px;
+            .dropdown {
+                position: absolute;
+                margin-top: -10px;
+                border-radius: 10px;
                 transition-duration: 250ms;
-                transition-property: margin;
-            }
-
-            .dropdown-content {
-                display: none;
-                margin: 10px 10px 10px 10px;
+                transition-property: background-color, box-shadow, margin;
 
                 >a {
-                    display: block;
-                    width: max-content;
-                    margin: 5px;
-                    font-size: 17px;
-                }
-            }
-
-            &:hover {
-                background-color: rgb(75, 75, 75);
-                box-shadow: 3px 3px 5px black;
-                margin-left: 5px;
-                margin-right: 5px;
-
-                >a {
-                    margin: 10px;
+                    transition-duration: 250ms;
+                    transition-property: margin;
                 }
 
                 .dropdown-content {
-                    display: block;
+                    display: none;
+                    flex-direction: column;
+                    gap: 5px;
+                    margin: 10px;
+
+                    >a {
+                        width: max-content;
+                        font-size: 17px;
+                    }
+                }
+
+                &:hover {
+                    background-color: rgb(75, 75, 75);
+                    box-shadow: 3px 3px 5px black;
+                    margin-top: -20px;
+
+                    >a {
+                        margin: 10px;
+                    }
+
+                    .dropdown-content {
+                        display: flex;
+                    }
                 }
             }
         }
@@ -207,7 +205,6 @@ body {
     text-align: center;
     padding: 30px;
     font-size: 18px;
-    min-height: calc(100vh - var(--header-height) - var(--footer-height));
 
     .title {
         display: block;
@@ -233,15 +230,17 @@ body {
 
     .links {
         margin: auto;
+        text-align: center;
 
         div {
-            text-align: center;
             font-size: 20px;
             margin-bottom: 10px;
         }
 
         a {
-            margin: auto 5px;
+            display: block;
+            width: max-content;
+            margin: 5px auto;
             font-size: 18px;
 
             i {
@@ -253,6 +252,11 @@ body {
                     color: rgb(175, 175, 175);
                 }
             }
+        }
+
+        &.links-inline a {
+            display: inline-block;
+            margin: 5px;
         }
     }
 }
@@ -307,19 +311,19 @@ body {
     }
 }
 
-input[type="text"],
-input[type="password"] {
+input[type=text],
+input[type=password] {
     padding: 5px;
     border-width: 0;
     border-radius: 5px;
     outline: none;
 }
 
-input[type="file"] {
+input[type=file] {
     display: none;
 }
 
-input[type="checkbox"] {
+input[type=checkbox] {
     height: 18px;
     width: 18px;
 }
@@ -387,5 +391,18 @@ button {
 .notfound {
     .button {
         display: inline-block;
+    }
+}
+
+.rick {
+
+    video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        z-index: 100;
     }
 }

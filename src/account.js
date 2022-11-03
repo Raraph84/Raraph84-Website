@@ -139,7 +139,7 @@ export class Register extends Component {
                 </div>
 
                 <div>
-                    <div className="hint">J'ai lu et accepté les <a href="https://youtu.be/dQw4w9WgXcQ" className="link">conditions générales d'utilisation</a> :</div>
+                    <div className="hint">J'ai lu et accepté les <Link to="/cgu" className="link">conditions générales d'utilisation</Link> :</div>
                     <input type="checkbox" ref={this.cgu} disabled={this.state.requesting} />
                 </div>
 

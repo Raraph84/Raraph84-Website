@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, createRef } from "react";
 import { Link } from "react-router-dom";
 import { getUser } from "./api";
 
@@ -26,7 +26,7 @@ export class Header extends Component {
 
     render() {
 
-        return <div className="header">
+        return <div className="header" id="header">
 
             <Link to="/home" className="logo link-container">
                 <img src="/imgs/logo.png" alt="Logo" />
@@ -35,16 +35,18 @@ export class Header extends Component {
 
             <div className="links">
                 <Link to="/home" className="link">Accueil</Link>
-                <div className="dropdown">
-                    <Link to="/hosting" className="link">Service d'hébergement <i className="fa-solid fa-caret-down" /></Link>
-                    <div className="dropdown-content">
-                        <Link to="/hosting/minecraft" className="link">Minecraft</Link>
-                        <Link to="/hosting/bungeecord" className="link">BungeeCord</Link>
-                        <Link to="/hosting/nodejs" className="link">NodeJS</Link>
-                        <Link to="/hosting/python" className="link">Python</Link>
-                        <Link to="/hosting/website" className="link">Site web</Link>
-                        <Link to="/hosting/database" className="link">Base de donnée</Link>
-                        <Link to="/hosting/kvmvps" className="link">VPS KVM</Link>
+                <div className="dropdown-container">
+                    <div className="dropdown">
+                        <Link to="/hosting" className="link">Service d'hébergement <i className="fa-solid fa-caret-down" /></Link>
+                        <div className="dropdown-content">
+                            <Link to="/hosting/minecraft" className="link">Minecraft</Link>
+                            <Link to="/hosting/bungeecord" className="link">BungeeCord</Link>
+                            <Link to="/hosting/nodejs" className="link">NodeJS</Link>
+                            <Link to="/hosting/python" className="link">Python</Link>
+                            <Link to="/hosting/website" className="link">Site web</Link>
+                            <Link to="/hosting/database" className="link">Base de donnée</Link>
+                            <Link to="/hosting/kvmvps" className="link">VPS KVM</Link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -67,20 +69,21 @@ export class Header extends Component {
 
 export class Footer extends Component {
     render() {
-        return <div className="footer">
+        return <div className="footer" id="footer">
 
-            <div className="links">
+            <div className="links links-inline">
                 <div>Mes réseaux</div>
                 <a href="https://discord.gg/MRjDxpx" target="_blank" rel="noreferrer"><i className="fa-brands fa-discord"></i></a>
                 <a href="https://github.com/Raraph84" target="_blank" rel="noreferrer"><i className="fa-brands fa-github"></i></a>
-                <a href="https://youtube.com/channel/UCA0z90EeHObZqVu-Yx-SKeQ" target="_blank" rel="noreferrer"><i className="fa-brands fa-youtube"></i></a>
+                <a href="https://www.youtube.com/@Raraph84" target="_blank" rel="noreferrer"><i className="fa-brands fa-youtube"></i></a>
                 <a href="https://twitter.com/Raraph84" target="_blank" rel="noreferrer"><i className="fa-brands fa-twitter"></i></a>
-                <a href="mailto:raraph84@gmail.com"><i className="fa-solid fa-envelope"></i></a>
+                <a href="mailto:contact@raraph.fr"><i className="fa-solid fa-envelope"></i></a>
             </div>
 
             <div className="links">
                 <div>Autres liens</div>
                 <a href="https://docs.api.raraph.fr" className="link">Documentation API</a>
+                <Link to="/cgu" className="link">Conditions générales d'utilisation (CGU)</Link>
             </div>
         </div>;
     }
@@ -120,5 +123,30 @@ export class Info extends Component {
 export class Loading extends Component {
     render() {
         return <div className="loading"><i className="fas fa-spinner" /></div>;
+    }
+}
+
+export class Rick extends Component {
+
+    constructor(props) {
+
+        super(props);
+
+        this.video = createRef();
+    }
+
+    componentDidMount() {
+
+        this.video.current.play().catch(() => document.location.assign("/404"));
+    }
+
+    render() {
+
+        document.title = "GOT RICKROLLED LOL | Raraph84";
+
+        return <div className="rick">
+            <Loading />
+            <video ref={this.video} src="https://files.raraph.fr/nssh/clips/rick.mp4" style={{ display: "none" }} onPlay={() => this.video.current.style.display = ""} />
+        </div>;
     }
 }
