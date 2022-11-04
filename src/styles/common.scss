@@ -66,6 +66,7 @@ body {
     display: flex;
     background-color: rgb(100, 100, 100);
     white-space: nowrap;
+    gap: 10px;
 
     .logo {
         display: flex;
@@ -85,7 +86,6 @@ body {
     .links {
         display: flex;
         align-items: center;
-        margin: 0 10px;
         gap: 10px;
 
         a {
@@ -153,50 +153,54 @@ body {
         }
     }
 
-    .menu {
+    .menu-container {
         margin: auto;
-        margin-top: calc((85px - 60px) / 2);
-        margin-right: 15px;
-        text-align: center;
-        border-radius: 10px;
-        background-color: rgb(40, 40, 40);
 
-        .user {
-            display: flex;
-            padding: 10px;
+        .menu {
+            position: absolute;
+            right: 15px;
+            margin-top: -30px;
+            text-align: center;
             border-radius: 10px;
-            cursor: pointer;
-            transition-property: background-color;
-            transition-duration: 150ms;
-        }
+            background-color: rgb(40, 40, 40);
 
-        .user:hover {
-            background-color: rgb(75, 75, 75);
-        }
+            .user {
+                display: flex;
+                padding: 10px;
+                border-radius: 10px;
+                cursor: pointer;
+                transition-property: background-color;
+                transition-duration: 150ms;
+            }
 
-        .user img {
-            border-radius: 20px;
-            height: 40px;
-            width: 40px;
-            background-color: rgb(75, 75, 75);
-        }
+            .user:hover {
+                background-color: rgb(75, 75, 75);
+            }
 
-        .user span {
-            margin: auto;
-            margin-left: 10px;
-            font-size: 18px;
-        }
+            .user img {
+                border-radius: 20px;
+                height: 40px;
+                width: 40px;
+                background-color: rgb(75, 75, 75);
+            }
 
-        a {
-            display: block;
-            border-radius: 10px;
-            padding: 5px;
-            text-decoration: none;
-            color: white;
-        }
+            .user span {
+                margin: auto;
+                margin-left: 10px;
+                font-size: 18px;
+            }
 
-        a:hover {
-            background-color: rgb(75, 75, 75);
+            a {
+                display: block;
+                border-radius: 10px;
+                padding: 5px;
+                text-decoration: none;
+                color: white;
+            }
+
+            a:hover {
+                background-color: rgb(75, 75, 75);
+            }
         }
     }
 }

@@ -51,9 +51,8 @@ export class Header extends Component {
                 </div>
             </div>
 
-            {!this.state.user
-                ? <Link className="login" to="/login">Se connecter</Link>
-                : <div className="menu" onClick={() => this.setState({ menu: !this.state.menu })}>
+            {!this.state.user ? <Link className="login" to="/login">Se connecter</Link> : <div className="menu-container">
+                <div className="menu" onClick={() => this.setState({ menu: !this.state.menu })}>
                     <div className="user">
                         <img src={this.state.user.avatarUrl || this.state.user.defaultAvatarUrl} alt=" " />
                         <span>{this.state.user.username}</span>
@@ -62,7 +61,8 @@ export class Header extends Component {
                         <Link to="/account">Mon compte</Link>
                         <Link to="/logout" style={{ color: "red" }}>Se déconnecter</Link>
                     </div>}
-                </div>}
+                </div>
+            </div>}
         </div>;
     }
 }
@@ -84,6 +84,7 @@ export class Footer extends Component {
                 <div>Autres liens</div>
                 <a href="https://docs.api.raraph.fr" className="link">Documentation API</a>
                 <Link to="/cgu" className="link">Conditions générales d'utilisation (CGU)</Link>
+                <a href="https://status.raraph.fr/raraph84" className="link">Statut des services</a>
             </div>
         </div>;
     }

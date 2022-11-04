@@ -240,14 +240,16 @@ export class Account extends Component {
         document.title = "Mon compte | Raraph84";
 
         return <div className="account">
-            <div className="title">{document.title}</div>
+            <div className="title">Mon compte</div>
 
             {this.state.requesting ? <Loading /> : null}
             {this.state.info}
 
-            {!this.state.user ? null : <div>
-                En développement !
-                {/*
+            <div>Cette page est en développement !</div>
+            <div>Pour supprimer votre compte, contactez-moi par email à l'adresse <a href="mailto:contact@raraph.fr" className="link">contact@raraph.fr</a></div>
+
+            {/*!this.state.user ? null : <div>
+
                 <div>
                     <span>Nom d'utilisateur :</span>
                     <input type="text" ref={this.username} />
@@ -282,8 +284,8 @@ export class Account extends Component {
                     <button disabled={this.state.requesting}>{this.state.editing ? "Sauvegarder" : "Modifier"}</button>
                     <button disabled={this.state.requesting}>Supprimer mon compte</button>
                 </div>
-                */}
-            </div>}
+
+            </div>*/}
         </div>;
     }
 }
