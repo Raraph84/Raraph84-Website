@@ -1,29 +1,17 @@
 import { Component } from "react";
-import { Info } from "../other";
+import { useParams } from "react-router-dom";
+import { Info, Loading } from "../other";
+import { getHeberg } from "../api";
 
-// Classe à refaire
-export class Heberg extends Component {
+import "../styles/hebergs.scss";
+
+class Heberg extends Component {
 
     constructor(props) {
 
         super(props);
 
-        this.checkError = (message) => {
-            if (message === "Invalid token")
-                document.location.assign("/login");
-            else if (message === "Heberg not exist")
-                this.setState({ status: "Cet hébergement n'existe pas !" });
-            else if (message === "No permission")
-                this.setState({ status: "Vous n'avez pas accès a cet hébergement !" });
-            else if (message === "Heberg already started")
-                this.setState({ status: "Cet hébergement est déjà démarré !" });
-            else if (message === "Heberg already stopped")
-                this.setState({ status: "Cet hébergement est déjà arrêté !" });
-            else
-                this.setState({ status: "Une erreur est survenue !" });
-        }
-
-        this.start = () => {
+        /*this.start = () => {
             this.setState({ status: "" });
             post("/heberg/start", JSON.stringify({ token: localStorage.getItem("token"), id: this.id })).then((response) => {
                 if (response.code !== 200) this.checkError(response.message);
@@ -61,26 +49,26 @@ export class Heberg extends Component {
                 if (response.code !== 200) this.checkError(response.message);
                 else this.setState({ status: "Téléchargement des librairies..." });
             });
-        }
+        }*/
 
-        this.id = props.urlParams.id;
         this.ws = null;
-        this.state = { status: "", infos: {}, logs: [] };
+        this.state = { requesting: false, info: null, heberg: null, logs: [] };
     }
 
     componentDidMount() {
 
-        this.connectLogs();
+        //this.connectLogs();
 
-        post("/heberg", JSON.stringify({ token: localStorage.getItem("token"), id: this.id })).then((response) => {
-            if (response.code === 200) {
-                this.setState({ infos: response });
-                document.title = response.name + " | Raraph84";
-            } else this.checkError(response.message);
+        this.setState({ requesting: true });
+        getHeberg(this.props.params.hebergId).then((heberg) => this.setState({ requesting: false, heberg })).catch((message) => {
+            if (message === "Invalid token") {
+                localStorage.removeItem("token");
+                document.location.assign("/");
+            } else this.setState({ requesting: false, info: <Info>Un problème est survenu !</Info> });
         });
     }
 
-    connectLogs() {
+    /*connectLogs() {
 
         this.log("[raraph.fr] Connexion...");
         this.ws = new WebSocket("wss://gateway.raraph.fr/hebergs");
@@ -113,62 +101,84 @@ export class Heberg extends Component {
     log(message) {
         this.state.logs.push(message);
         this.setState({ logs: this.state.logs });
-    }
+    }*/
 
     render() {
 
         document.title = "Hébergement | Raraph84";
 
-        return <div className="hebergsPanel">
-            <div className="title">{this.state.infos.name || "Hébergement"}</div>
+        const logo = this.state.heberg ? {
+            nodejs: "/imgs/hosting/logo-nodejs.png",
+            python: "/imgs/hosting/logo-python.png",
+            website: "/imgs/hosting/globe.png",
+            minecraft: "/imgs/hosting/logo-minecraft.png",
+            bungeecord: "/imgs/hosting/servers.png",
+            vps: "/imgs/hosting/logo-debian.png",
+            mysql: "/imgs/hosting/database.png",
+            mongodb: "/imgs/hosting/database.png"
+        }[this.state.heberg.type] : null;
 
-            {this.state.status ? <Info>{this.state.status} </Info> : null}
+        const type = this.state.heberg ? {
+            nodejs: "NodeJS",
+            python: "Python",
+            website: "Site web",
+            minecraft: "Serveur Minecraft",
+            bungeecord: "Serveur BungeeCord",
+            vps: "VPS",
+            mysql: "Base de données MySQL",
+            mongodb: "Base de données MongoDB"
+        }[this.state.heberg.type] : null;
 
-            <div className="panel">
+        const state = this.state.heberg ? {
+            starting: "Démarrage",
+            started: "En ligne",
+            stopping: "Arrêt",
+            stopped: "Hors ligne",
+            restarting: "Redémarrage",
+            deploying: "Déploiement"
+        }[this.state.heberg.state] : null;
+
+        const stateColor = this.state.heberg ? ({ started: "green", stopped: "red" }[this.state.heberg.state] || "orange") : null;
+
+        return <div className="heberg">
+            <div className="title">{this.state.heberg ? this.state.heberg.name : "Hébergement"}</div>
+
+            {this.state.requesting ? <Loading /> : null}
+            {this.state.info}
+
+            {this.state.heberg ? <div className="panel">
+
                 <div className="box infos">
                     <div className="name">Informations</div>
 
                     <div className="subname">Nom :</div>
-                    <div>{this.state.infos.name || "Sans nom"}</div>
+                    <div>{this.state.heberg.name}</div>
 
                     <div className="subname">Type :</div>
-                    {this.state.infos.type === "nodejs" ?
-                        <div>NodeJS <i style={{ color: "#82c91e" }} className="fab fa-node-js" /></div>
-                        : <div>Autre</div>}
+                    <div>{type} <img src={logo} alt="Logo type" /></div>
 
-                    <div className="subname">GitHub :</div>
-                    <div>{this.state.infos.github || "Aucun"}</div>
-
-                    <div className="subname">Statut :</div>
-                    <div>
-                        {this.state.infos.online ? "En ligne " : "Hors ligne "}
-                        <i className="fas fa-dot-circle" style={{ color: this.state.infos.online ? "green" : "red" }} />
-                    </div>
-
-                    <div className="subname">Déploiement automatique :</div>
-                    <div>{this.state.infos.autoDeploy ? "Oui" : "Non"}</div>
-
-                    <div className="subname">Cacher les librairies :</div>
-                    <div>{this.state.infos.cacheLibs ? "Oui" : "Non"}</div>
+                    {["nodejs", "python", "minecraft", "bungeecord", "vps", "minecraft"].includes(this.state.heberg.type) ? <>
+                        <div className="subname">Statut :</div>
+                        <div>{state} <i className="fas fa-dot-circle" style={{ color: stateColor }} /></div>
+                    </> : null}
                 </div>
 
-                <div className="box">
-                    <div className="name">{this.state.infos.canSendCommands ? "Console" : "Journaux"}</div>
-                    <div className="logs">
-                        <textarea readOnly value={this.state.logs.join("\n")} />
-                        <input style={{ display: this.state.infos.canSendCommands ? "" : "none" }} />
-                    </div>
+                <div className="box logs">
+                    <div className="name">Journaux</div>
+                    <textarea readOnly value={this.state.logs.join("\n")} />
                 </div>
 
                 <div className="box commands">
                     <div className="name">Commandes</div>
-                    <button onClick={this.start}>Démarrer</button>
-                    <button onClick={this.stop}>Arrêter</button>
-                    <button onClick={this.restart}>Redémarrer</button>
-                    <button onClick={this.deploy}>Déployer</button>
-                    <button onClick={this.downloadLibs} style={{ display: this.state.infos.cacheLibs ? "none" : "" }}>Retélécharger les librairies</button>
+                    <button>Démarrer</button>
+                    <button>Arrêter</button>
+                    <button>Redémarrer</button>
                 </div>
-            </div>
+
+            </div> : null}
         </div>;
     }
 }
+
+// eslint-disable-next-line
+export default (props) => <Heberg params={useParams()} {...props} />;

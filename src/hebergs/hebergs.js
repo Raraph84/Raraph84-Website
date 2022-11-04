@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { Info, Loading } from "../other";
 import { getHebergs } from "../api";
 
-export class Hebergs extends Component {
+import "../styles/hebergs.scss";
+
+export default class Hebergs extends Component {
 
     constructor(props) {
 
@@ -65,12 +67,12 @@ class Heberg extends Component {
             mongodb: "Base de données MongoDB"
         }[this.props.heberg.type];
 
-        const status = { running: "green", stopped: "red" }[this.props.heberg.state] || "orange";
+        const stateColor = { started: "green", stopped: "red" }[this.props.heberg.state] || "orange";
 
         return <Link className="heberg box link-container" to={"/hebergs/" + this.props.heberg.id}>
             <img src={logo} alt="Logo type" />
             <div className="name link">{this.props.heberg.name} - {type}</div>
-            {this.props.heberg.state ? <i className="fas fa-dot-circle" style={{ color: status }} /> : null}
+            {this.props.heberg.state ? <i className="fas fa-dot-circle" style={{ color: stateColor }} /> : null}
         </Link>;
     }
 }

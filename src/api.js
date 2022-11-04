@@ -69,3 +69,18 @@ export const getHebergs = async () => new Promise((resolve, reject) => {
         else res.json().then((res) => reject(res.message)).catch((error) => reject(error));
     }).catch((error) => reject(error));
 });
+
+export const getHeberg = async (hebergId) => new Promise((resolve, reject) => {
+
+    fetch(HOST + "/hebergs/" + hebergId, {
+        method: "GET",
+        headers: { authorization: localStorage.getItem("token") }
+    }).then(async (res) => {
+        if (res.ok) res.json().then((res) => {
+            const heberg = { ...res };
+            delete heberg.code;
+            resolve(heberg);
+        }).catch((error) => reject(error));
+        else res.json().then((res) => reject(res.message)).catch((error) => reject(error));
+    }).catch((error) => reject(error));
+});

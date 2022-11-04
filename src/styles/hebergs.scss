@@ -19,56 +19,69 @@
     }
 }
 
-.hebergsPanel {
+.heberg {
     .panel {
-        display: grid;
-        grid-template-columns: max-content auto max-content;
-    }
+        display: flex;
 
-    .logs {
-        margin-top: 10px;
-        border-radius: 10px;
-    }
+        .box .name {
+            font-size: 24px;
+            font-weight: bold;
+            padding-bottom: 5px;
+        }
 
-    .logs textarea {
-        display: block;
-        width: 100%;
-        border-width: 0;
-        margin: 0;
-        padding: 0;
-        background-color: rgb(50, 50, 50);
-        color: white;
-        resize: none;
-    }
+        .infos {
+            img {
+                margin: 0;
+                max-width: 25px;
+                max-height: 25px;
+            }
 
-    .logs input {
-        display: block;
-        width: 100%;
-        border-width: 0;
-        padding: 0;
-        background-color: rgb(40, 40, 40);
-        color: white;
-    }
+            .subname {
+                padding-top: 5px;
+                font-size: 20px;
+            }
+        }
 
-    .commands button {
-        display: block;
-        margin: 10px auto 0 auto;
-        padding: 10px;
-        border-width: 0;
-        border-radius: 10px;
-        font-size: 16px;
-        background-color: rgb(50, 50, 50);
-        color: white;
-        cursor: pointer;
-        transition-duration: 150ms;
-        transition-property: background-color, transform;
-    }
+        .logs {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            height: 50vh;
 
-    .commands button:hover {
-        background-color: rgb(75, 75, 75);
-    }
+            textarea {
+                flex-grow: 1;
+                margin-top: 5px;
+                border-width: 0;
+                border-radius: 10px;
+                background-color: rgb(50, 50, 50);
+                color: white;
+                resize: none;
+                outline: none;
+            }
+        }
 
-    .commands button:active {
-        transform: translateY(3px);
+        .commands {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            button {
+                padding: 10px;
+                border-width: 0;
+                border-radius: 10px;
+                font-size: 16px;
+                background-color: rgb(50, 50, 50);
+                transition-duration: 150ms;
+                transition-property: background-color, transform;
+
+                &:hover {
+                    background-color: rgb(75, 75, 75);
+                }
+
+                &:active {
+                    transform: translateY(3px);
+                }
+            }
+        }
     }
 }
