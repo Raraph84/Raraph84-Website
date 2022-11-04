@@ -1,9 +1,7 @@
-import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Component } from "react";
+import { Link } from "react-router-dom";
 
-import "../styles/hosting.scss";
-
-class Home extends React.Component {
+export default class Home extends Component {
     render() {
 
         document.title = "Service d'hébergement | Raraph84";
@@ -49,16 +47,6 @@ class Home extends React.Component {
                     <div>Ayez un accès complet à votre serveur pour configurer tous vos services</div>
                 </Link>
             </div>
-        </div>;
-    }
-}
-
-export default class Hosting extends React.Component {
-    render() {
-        return <div>
-            <Routes>
-                <Route path="/" element={<Home />} />
-            </Routes>
         </div>;
     }
 }

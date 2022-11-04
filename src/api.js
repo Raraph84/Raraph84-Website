@@ -58,3 +58,14 @@ export const getUser = async (user) => new Promise((resolve, reject) => {
         else res.json().then((res) => reject(res.message)).catch((error) => reject(error));
     }).catch((error) => reject(error));
 });
+
+export const getHebergs = async () => new Promise((resolve, reject) => {
+
+    fetch(HOST + "/hebergs", {
+        method: "GET",
+        headers: { authorization: localStorage.getItem("token") }
+    }).then(async (res) => {
+        if (res.ok) res.json().then((res) => resolve(res.hebergs)).catch((error) => reject(error));
+        else res.json().then((res) => reject(res.message)).catch((error) => reject(error));
+    }).catch((error) => reject(error));
+});

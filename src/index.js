@@ -3,7 +3,8 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Home } from "./home";
-import Hosting from "./hosting/hosting";
+import Hosting from "./hosting/index";
+import Hebergs from "./hebergs/index";
 import { Account, Login, Logout, Register } from "./account";
 import { Footer, Header, NotFound, Rick, Unavailable } from "./other";
 
@@ -35,11 +36,12 @@ class Website extends Component {
                     : <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/home" element={<Home />} />
-                        <Route path="/hosting" element={<Hosting />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/logout" element={<Logout />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/account" element={<Account />} />
+                        <Route path="/hosting" element={<Hosting />} />
+                        <Route path="/hebergs" element={<Hebergs />} />
                         <Route path="/cgu" element={<Rick />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>}
