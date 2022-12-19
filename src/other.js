@@ -35,20 +35,6 @@ export class Header extends Component {
 
             <div className="links">
                 <Link to="/home" className="link">Accueil</Link>
-                <div className="dropdown-container">
-                    <div className="dropdown">
-                        <Link to="/hosting" className="link">Service d'hébergement <i className="fa-solid fa-caret-down" /></Link>
-                        <div className="dropdown-content">
-                            <Link to="/hosting/minecraft" className="link">Minecraft</Link>
-                            <Link to="/hosting/bungeecord" className="link">BungeeCord</Link>
-                            <Link to="/hosting/nodejs" className="link">NodeJS</Link>
-                            <Link to="/hosting/python" className="link">Python</Link>
-                            <Link to="/hosting/website" className="link">Site web</Link>
-                            <Link to="/hosting/database" className="link">Base de donnée</Link>
-                            <Link to="/hosting/kvmvps" className="link">VPS KVM</Link>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             {!this.state.user ? <Link className="login" to="/login">Se connecter</Link> : <div className="menu-container">

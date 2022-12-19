@@ -1,7 +1,7 @@
 import { Component, createRef } from "react";
 import { Link } from "react-router-dom";
 import { Info, Loading } from "./other";
-import { login, createAccountP1, createAccountP2, logout, getUser } from "./api";
+import { createAccountP1, createAccountP2, login, logout, getUser } from "./api";
 
 import "./styles/account.scss";
 

@@ -6,11 +6,6 @@ import { Home } from "./home";
 import { Account, Login, Logout, Register } from "./account";
 import { Footer, Header, NotFound, Rick, Unavailable } from "./other";
 
-import Hosting from "./hosting/hosting";
-
-import Hebergs from "./hebergs/hebergs";
-import Heberg from "./hebergs/heberg";
-
 import "./styles/common.scss";
 
 const MAINTENANCE = false;
@@ -43,9 +38,6 @@ class Website extends Component {
                         <Route path="/logout" element={<Logout />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/account" element={<Account />} />
-                        <Route path="/hosting" element={<Hosting />} />
-                        <Route path="/hebergs" element={<Hebergs />} />
-                        <Route path="/hebergs/:hebergId" element={<Heberg />} />
                         <Route path="/cgu" element={<Rick />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>}
