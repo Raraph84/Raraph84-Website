@@ -316,7 +316,8 @@ body {
 }
 
 input[type=text],
-input[type=password] {
+input[type=password],
+input[type=number] {
     padding: 5px;
     border-width: 0;
     border-radius: 5px;

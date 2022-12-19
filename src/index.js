@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Home } from "./home";
+import { PasswdGen } from "./passwdgen";
 import { Account, Login, Logout, Register } from "./account";
 import { Footer, Header, NotFound, Rick, Unavailable } from "./other";
 
@@ -34,6 +35,7 @@ class Website extends Component {
                     : <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/home" element={<Home />} />
+                        <Route path="/passwdgen" element={<PasswdGen />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/logout" element={<Logout />} />
                         <Route path="/register" element={<Register />} />

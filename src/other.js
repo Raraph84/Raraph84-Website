@@ -35,6 +35,7 @@ export class Header extends Component {
 
             <div className="links">
                 <Link to="/home" className="link">Accueil</Link>
+                <Link to="/passwdgen" className="link">Générateur de mots de passe</Link>
             </div>
 
             {!this.state.user ? <Link className="login" to="/login">Se connecter</Link> : <div className="menu-container">
@@ -114,7 +115,7 @@ export class Loading extends Component {
     }
 }
 
-export class Rick extends Component {
+export class RickClass extends Component {
 
     constructor(props) {
 
@@ -125,12 +126,15 @@ export class Rick extends Component {
 
     componentDidMount() {
 
-        this.video.current.play().catch(() => document.location.assign("/404"));
+        this.video.current.play().then(() => {
+            document.title = "GOT RICKROLLED LOL | Raraph84";
+            document.body.requestFullscreen().catch(() => { });
+        }).catch(() => {
+            window.location.href = "/home";
+        });
     }
 
     render() {
-
-        document.title = "GOT RICKROLLED LOL | Raraph84";
 
         return <div className="rick">
             <Loading />
@@ -138,3 +142,5 @@ export class Rick extends Component {
         </div>;
     }
 }
+
+export const Rick = (props) => <RickClass {...props} />;
