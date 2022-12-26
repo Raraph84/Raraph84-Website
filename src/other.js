@@ -26,7 +26,7 @@ export class Header extends Component {
 
     render() {
 
-        return <div className="header" id="header">
+        return <div className="header" ref={this.props.headerRef}>
 
             <Link to="/home" className="logo link-container">
                 <img src="/imgs/logo.png" alt="Logo" />
@@ -36,6 +36,7 @@ export class Header extends Component {
             <div className="links">
                 <Link to="/home" className="link">Accueil</Link>
                 <Link to="/passwdgen" className="link">Générateur de mots de passe</Link>
+                <Link to="/countdown" className="link">Décompte</Link>
             </div>
 
             {!this.state.user ? <Link className="login" to="/login">Se connecter</Link> : <div className="menu-container">
@@ -57,7 +58,7 @@ export class Header extends Component {
 
 export class Footer extends Component {
     render() {
-        return <div className="footer" id="footer">
+        return <div className="footer" ref={this.props.footerRef}>
 
             <div className="links links-inline">
                 <div>Mes réseaux</div>
@@ -128,7 +129,10 @@ export class RickClass extends Component {
 
         this.video.current.play().then(() => {
             document.title = "GOT RICKROLLED LOL | Raraph84";
-            document.body.requestFullscreen().catch(() => { });
+            try {
+                document.documentElement.requestFullscreen();
+            } catch (error) {
+            }
         }).catch(() => {
             window.location.href = "/home";
         });
