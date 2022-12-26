@@ -33,7 +33,7 @@ class Website extends Component {
 
     updateContentHeight() {
         if (!this.headerRef.current || !this.contentRef.current || !this.footerRef.current) return;
-        if (!this.state.footerAndHeaderEnabled)
+        if (this.state.footerAndHeaderEnabled)
             this.contentRef.current.style.minHeight = (window.innerHeight - this.headerRef.current.offsetHeight - this.footerRef.current.offsetHeight) + "px";
         else
             this.contentRef.current.style.minHeight = null;
@@ -41,7 +41,7 @@ class Website extends Component {
 
     render() {
 
-        const setHeaderAndFooterEnabled = (value) => this.setState({ footerAndHeaderEnabled: value });
+        const setHeaderAndFooterEnabled = (value) => this.setState({ footerAndHeaderEnabled: value }, () => this.updateContentHeight());
 
         return <BrowserRouter>
             {this.state.footerAndHeaderEnabled ? <Header headerRef={this.headerRef} /> : null}
