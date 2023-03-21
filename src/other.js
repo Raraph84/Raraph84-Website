@@ -62,11 +62,12 @@ export class Footer extends Component {
 
             <div className="links links-inline">
                 <div>Mes réseaux</div>
-                <a href="https://discord.gg/MRjDxpx" target="_blank" rel="noreferrer"><i className="fa-brands fa-discord"></i></a>
-                <a href="https://github.com/Raraph84" target="_blank" rel="noreferrer"><i className="fa-brands fa-github"></i></a>
-                <a href="https://www.youtube.com/@Raraph84" target="_blank" rel="noreferrer"><i className="fa-brands fa-youtube"></i></a>
-                <a href="https://twitter.com/Raraph84" target="_blank" rel="noreferrer"><i className="fa-brands fa-twitter"></i></a>
-                <a href="mailto:contact@raraph.fr"><i className="fa-solid fa-envelope"></i></a>
+                <a href="https://discord.gg/MRjDxpx" target="_blank" rel="noreferrer"><i className="fa-brands fa-discord" /></a>
+                <a href="https://github.com/Raraph84" target="_blank" rel="noreferrer"><i className="fa-brands fa-github" /></a>
+                <a href="https://youtube.com/@Raraph84" target="_blank" rel="noreferrer"><i className="fa-brands fa-youtube" /></a>
+                <a href="https://twitch.tv/Raraph84" target="_blank" rel="noreferrer"><i className="fa-brands fa-twitch" /></a>
+                <a href="https://twitter.com/Raraph84" target="_blank" rel="noreferrer"><i className="fa-brands fa-twitter" /></a>
+                <a href="mailto:contact@raraph.fr"><i className="fa-solid fa-envelope" /></a>
             </div>
 
             <div className="links">
