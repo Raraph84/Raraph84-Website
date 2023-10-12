@@ -67,6 +67,8 @@ export class Footer extends Component {
                 <a href="https://youtube.com/@Raraph84" target="_blank" rel="noreferrer"><i className="fa-brands fa-youtube" /></a>
                 <a href="https://twitch.tv/Raraph84" target="_blank" rel="noreferrer"><i className="fa-brands fa-twitch" /></a>
                 <a href="https://twitter.com/Raraph84" target="_blank" rel="noreferrer"><i className="fa-brands fa-twitter" /></a>
+                <a href="https://instagram.com/raraph84" target="_blank" rel="noreferrer"><i className="fa-brands fa-instagram" /></a>
+                <a href="https://tiktok.com/@raraph84" target="_blank" rel="noreferrer"><i className="fa-brands fa-tiktok" /></a>
                 <a href="mailto:contact@raraph.fr"><i className="fa-solid fa-envelope" /></a>
             </div>
 

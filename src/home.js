@@ -15,14 +15,14 @@ export class Home extends Component {
                 <div>Je suis développeur :</div>
                 <li>De sites web (Front : ReactJS, Back : NodeJS)</li>
                 <li>De plugins Minecraft (Java)</li>
-                <li>De launcher Minecraft (Java/ElectronJS)</li>
+                <li>De launchers Minecraft (Java/ElectronJS)</li>
                 <li>Et d'autres choses...</li>
             </ul>
 
             <div className="subtitle">Mes projets</div>
             <div className="projects">
                 <Project link="https://www.eclipsia.fr/" name="Eclipsia" imageUrl="/imgs/projects/logo-eclipsia.png" description="Eclipsia est un serveur Minecraft Mini-Jeux créé par des amis." />
-                <Project link="https://discord.gg/SyWDZZ9FkC" name="Polycube" imageUrl="/imgs/projects/logo-polycube.png" description="Polycube propose des services de solutions d'hébergements. Profitez d'offres pas chères pour monter votre projet." />
+                <Project link="https://dsc.polycube.fr/" name="Polycube" imageUrl="/imgs/projects/logo-polycube.png" description="Polycube propose des services de solutions d'hébergements. Profitez d'offres pas chères pour monter votre projet." />
             </div>
         </div>;
     }
