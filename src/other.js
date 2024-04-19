@@ -76,7 +76,7 @@ export class Footer extends Component {
                 <div>Autres liens</div>
                 <a href="https://docs.api.raraph.fr" className="link">Documentation API</a>
                 <Link to="/cgu" className="link">Conditions générales d'utilisation (CGU)</Link>
-                <a href="https://status.raraph.fr/raraph84" className="link">Statut des services</a>
+                <a href="https://status.raraph.fr" className="link">Statut des services</a>
             </div>
         </div>;
     }
