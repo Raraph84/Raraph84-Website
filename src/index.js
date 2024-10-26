@@ -8,7 +8,7 @@ import { Countdown } from "./countdown";
 import { Account, Login, Logout, Register } from "./account";
 import { Footer, Header, NotFound, Rick } from "./other";
 
-import "./styles/common.scss";
+import "./styles/globals.scss";
 
 class Website extends Component {
 
