@@ -38,7 +38,8 @@ export class Login extends Component {
             }));
         }
 
-        return <div className="login">
+        return <div className="login-page">
+
             <div className="title">Connexion</div>
 
             {this.state.requesting ? <Loading /> : null}
@@ -125,7 +126,8 @@ export class Register extends Component {
             }));
         }
 
-        return <div className="login">
+        return <div className="login-page">
+
             <div className="title">Créer un compte</div>
 
             {this.state.requesting ? <Loading /> : null}
@@ -239,7 +241,8 @@ export class Account extends Component {
 
         document.title = "Mon compte | Raraph84";
 
-        return <div className="account">
+        return <div className="account-page">
+
             <div className="title">Mon compte</div>
 
             {this.state.requesting ? <Loading /> : null}

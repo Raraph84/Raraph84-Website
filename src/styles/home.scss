@@ -1,4 +1,4 @@
-.home {
+.home-page {
     ul {
         display: inline-block;
         text-align: left;
@@ -17,7 +17,6 @@
     .projects {
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
         justify-content: center;
 
         .box {

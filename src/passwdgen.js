@@ -51,7 +51,7 @@ export class PasswdGen extends Component {
             setTimeout(() => this.setState({ copied: null }), 1000);
         }
 
-        return <div className="passwdgen">
+        return <div className="passwdgen-page">
 
             <div className="title">Générateur de mots de passe</div>
 

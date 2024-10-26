@@ -26,15 +26,15 @@ export class Header extends Component {
 
     render() {
 
-        return <div className="header" ref={this.props.headerRef}>
+        return <header ref={this.props.headerRef}>
 
-            <Link to="/home" className="logo link-container">
+            <Link to="/" className="logo link-container">
                 <img src="/imgs/logo.png" alt="Logo" />
                 <span className="link">Raraph84</span>
             </Link>
 
             <div className="links">
-                <Link to="/home" className="link">Accueil</Link>
+                <Link to="/" className="link">Accueil</Link>
                 <Link to="/passwdgen" className="link">Générateur de mots de passe</Link>
                 <Link to="/countdown" className="link">Décompte</Link>
             </div>
@@ -51,13 +51,13 @@ export class Header extends Component {
                     </div>}
                 </div>
             </div>}
-        </div>;
+        </header>;
     }
 }
 
 export class Footer extends Component {
     render() {
-        return <div className="footer" ref={this.props.footerRef}>
+        return <footer ref={this.props.footerRef}>
 
             <div className="links links-inline">
                 <div>Mes réseaux</div>
@@ -77,7 +77,7 @@ export class Footer extends Component {
                 <Link to="/cgu" className="link">Conditions générales d'utilisation (CGU)</Link>
                 <a href="https://status.raraph.fr" className="link">Statut des services</a>
             </div>
-        </div>;
+        </footer>;
     }
 }
 
@@ -89,7 +89,7 @@ export class NotFound extends Component {
         return <div className="notfound">
             <div className="title">Tu es perdu ?</div>
             <div className="subtitle">Cette page n'existe pas (ou pas encore)</div>
-            <Link to="/home" className="button">Revenir sur la page principale</Link>
+            <Link to="/" className="button">Revenir sur la page principale</Link>
         </div>;
     }
 }
@@ -136,7 +136,7 @@ export class RickClass extends Component {
             } catch (error) {
             }
         }).catch(() => {
-            window.location.href = "/home";
+            window.location.href = "/";
         });
     }
 

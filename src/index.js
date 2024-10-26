@@ -6,11 +6,9 @@ import { Home } from "./home";
 import { PasswdGen } from "./passwdgen";
 import { Countdown } from "./countdown";
 import { Account, Login, Logout, Register } from "./account";
-import { Footer, Header, NotFound, Rick, Unavailable } from "./other";
+import { Footer, Header, NotFound, Rick } from "./other";
 
 import "./styles/common.scss";
-
-const MAINTENANCE = false;
 
 class Website extends Component {
 
@@ -19,7 +17,7 @@ class Website extends Component {
         super(props);
 
         this.headerRef = createRef();
-        this.contentRef = createRef();
+        this.mainRef = createRef();
         this.footerRef = createRef();
 
         this.state = { footerAndHeaderEnabled: true };
@@ -32,11 +30,11 @@ class Website extends Component {
     }
 
     updateContentHeight() {
-        if (!this.headerRef.current || !this.contentRef.current || !this.footerRef.current) return;
+        if (!this.headerRef.current || !this.mainRef.current || !this.footerRef.current) return;
         if (this.state.footerAndHeaderEnabled)
-            this.contentRef.current.style.minHeight = (window.innerHeight - this.headerRef.current.offsetHeight - this.footerRef.current.offsetHeight) + "px";
+            this.mainRef.current.style.minHeight = (window.innerHeight - this.headerRef.current.offsetHeight - this.footerRef.current.offsetHeight) + "px";
         else
-            this.contentRef.current.style.minHeight = null;
+            this.mainRef.current.style.minHeight = null;
     }
 
     render() {
@@ -44,24 +42,21 @@ class Website extends Component {
         const setHeaderAndFooterEnabled = (value) => this.setState({ footerAndHeaderEnabled: value }, () => this.updateContentHeight());
 
         return <BrowserRouter>
-            {this.state.footerAndHeaderEnabled ? <Header headerRef={this.headerRef} /> : null}
-            <div className="content" ref={this.contentRef}>
-                {MAINTENANCE
-                    ? <Unavailable />
-                    : <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/home" element={<Home />} />
-                        <Route path="/passwdgen" element={<PasswdGen />} />
-                        <Route path="/countdown" element={<Countdown setHeaderAndFooterEnabled={setHeaderAndFooterEnabled} />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/logout" element={<Logout />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/account" element={<Account />} />
-                        <Route path="/cgu" element={<Rick />} />
-                        <Route path="*" element={<NotFound />} />
-                    </Routes>}
-            </div>
-            {this.state.footerAndHeaderEnabled ? <Footer footerRef={this.footerRef} /> : null}
+            {this.state.footerAndHeaderEnabled && <Header headerRef={this.headerRef} />}
+            <main ref={this.mainRef}>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/passwdgen" element={<PasswdGen />} />
+                    <Route path="/countdown" element={<Countdown setHeaderAndFooterEnabled={setHeaderAndFooterEnabled} />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/logout" element={<Logout />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/account" element={<Account />} />
+                    <Route path="/cgu" element={<Rick />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </main>
+            {this.state.footerAndHeaderEnabled && <Footer footerRef={this.footerRef} />}
         </BrowserRouter>;
     }
 }

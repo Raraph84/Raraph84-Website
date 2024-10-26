@@ -58,15 +58,43 @@
     margin: 0;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+
+    &:disabled {
+        cursor: default;
+    }
+}
+
+input:not([type=checkbox]) {
+    background: none;
+    border: none;
+    outline: none;
+    color: inherit;
+    font: inherit;
+}
+
 body {
-    font-family: sans-serif;
-    background-color: rgb(50, 50, 50);
+    --dark-blue: #152A38;
+    --light-blue: #29435C;
+    background-color: var(--dark-blue);
+    font-family: "Chillax", sans-serif;
+    font-weight: 500;
     color: white;
 }
 
-.header {
+header {
     display: flex;
-    background-color: rgb(100, 100, 100);
+    border-bottom: 1px solid;
     white-space: nowrap;
     gap: 10px;
 
@@ -80,7 +108,6 @@ body {
 
         span {
             margin: auto 5px;
-            color: white;
             font-size: 28px;
         }
     }
@@ -94,65 +121,15 @@ body {
             display: block;
             font-size: 18px;
         }
-
-        .dropdown-container {
-
-            .dropdown {
-                position: absolute;
-                margin-top: -10px;
-                border-radius: 10px;
-                transition-duration: 250ms;
-                transition-property: background-color, box-shadow, margin;
-
-                >a {
-                    transition-duration: 250ms;
-                    transition-property: margin;
-                }
-
-                .dropdown-content {
-                    display: none;
-                    flex-direction: column;
-                    gap: 5px;
-                    margin: 10px;
-
-                    >a {
-                        width: max-content;
-                        font-size: 17px;
-                    }
-                }
-
-                &:hover {
-                    background-color: rgb(75, 75, 75);
-                    box-shadow: 3px 3px 5px black;
-                    margin-top: -20px;
-
-                    >a {
-                        margin: 10px;
-                    }
-
-                    .dropdown-content {
-                        display: flex;
-                    }
-                }
-            }
-        }
     }
 
     .login {
         margin: auto;
         margin-right: 15px;
-        padding: 10px;
+        padding: 8px 12px;
         border-radius: 10px;
-        background-color: rgb(50, 50, 50);
+        background-color: var(--light-blue);
         font-size: 20px;
-        text-decoration: none;
-        color: white;
-        transition-duration: 150ms;
-        transition-property: background-color;
-
-        &:hover {
-            background-color: rgb(75, 75, 75);
-        }
     }
 
     .menu-container {
@@ -164,50 +141,37 @@ body {
             margin-top: -30px;
             text-align: center;
             border-radius: 10px;
-            background-color: rgb(40, 40, 40);
+            background-color: var(--light-blue);
 
             .user {
                 display: flex;
                 padding: 10px;
                 border-radius: 10px;
                 cursor: pointer;
-                transition-property: background-color;
-                transition-duration: 150ms;
-            }
 
-            .user:hover {
-                background-color: rgb(75, 75, 75);
-            }
+                img {
+                    border-radius: 20px;
+                    height: 40px;
+                    width: 40px;
+                }
 
-            .user img {
-                border-radius: 20px;
-                height: 40px;
-                width: 40px;
-                background-color: rgb(75, 75, 75);
-            }
-
-            .user span {
-                margin: auto;
-                margin-left: 10px;
-                font-size: 18px;
+                span {
+                    margin: auto;
+                    margin-left: 10px;
+                    font-size: 18px;
+                }
             }
 
             a {
                 display: block;
                 border-radius: 10px;
                 padding: 5px;
-                text-decoration: none;
-                color: white;
-            }
-
-            a:hover {
-                background-color: rgb(75, 75, 75);
             }
         }
     }
 }
 
-.content {
+main {
     text-align: center;
     padding: 30px;
     font-size: 18px;
@@ -228,11 +192,11 @@ body {
     }
 }
 
-.footer {
+footer {
     display: flex;
     width: 100%;
     padding: 15px;
-    background-color: rgb(40, 40, 40);
+    border-top: 1px solid;
 
     .links {
         margin: auto;
@@ -255,7 +219,7 @@ body {
                 transition-duration: 150ms;
 
                 &:hover {
-                    color: rgb(175, 175, 175);
+                    color: rgb(200, 200, 200);
                 }
             }
         }
@@ -271,10 +235,9 @@ body {
     display: inline-block;
     margin: 10px;
     padding: 15px;
-    background-color: rgb(100, 100, 100);
+    background-color: var(--light-blue);
     border-radius: 15px;
     font-size: 18px;
-    box-shadow: 3px 3px 10px black;
 
     .box-title {
         display: inline-block;
@@ -294,38 +257,24 @@ body {
 
 .button {
     display: block;
-    padding: 8px;
-    background-color: rgb(100, 100, 100);
+    padding: 6px 12px;
+    background-color: var(--light-blue);
     font-size: 18px;
     border-radius: 10px;
     transition-duration: 150ms;
-    transition-property: background-color, transform;
+    transition-property: transform;
 
-    &:hover {
-        background-color: rgb(75, 75, 75);
-    }
-
-    &:active {
+    &:active:not(:disabled) {
         transform: translateY(3px);
-    }
-
-    &:disabled {
-        background-color: rgb(75, 75, 75);
-        color: rgb(200, 200, 200);
-        transform: translateY(0);
-        cursor: default;
     }
 }
 
-input[type=text],
-input[type=password],
-input[type=number],
-input[type=date],
-input[type=datetime-local] {
-    padding: 5px;
-    border-width: 0;
+input:not([type=checkbox]) {
+    padding: 4px 6px;
+    background-color: white;
     border-radius: 5px;
-    outline: none;
+    color: black;
+    font-size: 14px;
 }
 
 input[type=file] {
@@ -335,19 +284,6 @@ input[type=file] {
 input[type=checkbox] {
     height: 18px;
     width: 18px;
-}
-
-a {
-    text-decoration: none;
-    color: white;
-}
-
-button {
-    cursor: pointer;
-    color: white;
-    font-family: sans-serif;
-    background-color: transparent;
-    border-width: 0;
 }
 
 .link {
