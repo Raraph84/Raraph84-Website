@@ -93,79 +93,90 @@ body {
 }
 
 header {
+    height: 86px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 15px;
     border-bottom: 1px solid;
     white-space: nowrap;
     gap: 10px;
 
+    .left {
+        display: flex;
+        gap: 5px;
+    }
+
     .logo {
         display: flex;
+        align-items: center;
+        gap: 5px;
+        padding-right: 5px;
+        font-size: 28px;
 
         img {
             margin: 5px;
             height: 75px;
-        }
-
-        span {
-            margin: auto 5px;
-            font-size: 28px;
         }
     }
 
     .links {
         display: flex;
         align-items: center;
-        gap: 10px;
 
         a {
-            display: block;
+            margin: 5px;
             font-size: 18px;
         }
     }
 
     .login {
-        margin: auto;
-        margin-right: 15px;
         padding: 8px 12px;
         border-radius: 10px;
         background-color: var(--light-blue);
         font-size: 20px;
     }
 
-    .menu-container {
-        margin: auto;
+    .menu {
+        position: relative;
 
-        .menu {
-            position: absolute;
-            right: 15px;
-            margin-top: -30px;
-            text-align: center;
+        button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
             border-radius: 10px;
+            font-size: 18px;
             background-color: var(--light-blue);
 
-            .user {
-                display: flex;
-                padding: 10px;
-                border-radius: 10px;
-                cursor: pointer;
-
-                img {
-                    border-radius: 20px;
-                    height: 40px;
-                    width: 40px;
-                }
-
-                span {
-                    margin: auto;
-                    margin-left: 10px;
-                    font-size: 18px;
-                }
+            img {
+                height: 40px;
+                border-radius: 20px;
             }
+        }
+
+        .submenu {
+            position: absolute;
+            width: 100%;
+            display: none;
+            flex-direction: column;
+            background-color: var(--light-blue);
+            border-radius: 0 0 10px 10px;
+            text-align: center;
 
             a {
-                display: block;
+                padding: 5px 10px;
                 border-radius: 10px;
-                padding: 5px;
+            }
+        }
+
+        &.open {
+            button {
+                border-radius: 10px 10px 0 0;
+            }
+
+            .submenu {
+                display: flex;
             }
         }
     }

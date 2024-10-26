@@ -28,29 +28,30 @@ export class Header extends Component {
 
         return <header ref={this.props.headerRef}>
 
-            <Link to="/" className="logo link-container">
-                <img src="/imgs/logo.png" alt="Logo" />
-                <span className="link">Raraph84</span>
-            </Link>
+            <div className="left">
+                <Link to="/" className="logo link-container">
+                    <img src="/imgs/logo.png" alt="Logo" />
+                    <span className="link">Raraph84</span>
+                </Link>
 
-            <div className="links">
-                <Link to="/" className="link">Accueil</Link>
-                <Link to="/passwdgen" className="link">Générateur de mots de passe</Link>
-                <Link to="/countdown" className="link">Décompte</Link>
+                <div className="links">
+                    <Link to="/" className="link">Accueil</Link>
+                    <Link to="/passwdgen" className="link">Générateur de mots de passe</Link>
+                    <Link to="/countdown" className="link">Décompte</Link>
+                </div>
             </div>
 
-            {!this.state.user ? <Link className="login" to="/login">Se connecter</Link> : <div className="menu-container">
-                <div className="menu" onClick={() => this.setState({ menu: !this.state.menu })}>
-                    <div className="user">
-                        <img src={this.state.user.avatarUrl || this.state.user.defaultAvatarUrl} alt=" " />
-                        <span>{this.state.user.username}</span>
-                    </div>
-                    {!this.state.menu ? null : <div>
-                        <Link to="/account">Mon compte</Link>
-                        <Link to="/logout" style={{ color: "red" }}>Se déconnecter</Link>
-                    </div>}
+            {!this.state.user ? <Link className="login" to="/login">Se connecter</Link> : <div className={"menu" + (this.state.menu ? " open" : "")}>
+                <button onClick={() => this.setState({ menu: !this.state.menu })}>
+                    <img src={this.state.user.avatarUrl ?? this.state.user.defaultAvatarUrl} alt="" />
+                    <span>{this.state.user.username}</span>
+                </button>
+                <div className="submenu">
+                    <Link to="/account">Mon compte</Link>
+                    <Link to="/logout" style={{ color: "red" }}>Se déconnecter</Link>
                 </div>
             </div>}
+
         </header>;
     }
 }

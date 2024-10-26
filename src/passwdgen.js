@@ -17,7 +17,7 @@ export class PasswdGen extends Component {
 
         document.title = "Générateur de mots de passe | Raraph84";
 
-        const generate = () => {
+        const generateHandler = () => {
 
             const length = parseInt(this.lengthInputRef.current.value);
             if (isNaN(length)) {
@@ -39,9 +39,9 @@ export class PasswdGen extends Component {
             let password = "";
             for (let i = 0; i < length; i++) password += chars.charAt(Math.floor(Math.random() * chars.length));
             this.setState({ password, copied: null });
-        }
+        };
 
-        const copy = () => {
+        const copyHandler = () => {
             try {
                 navigator.clipboard.writeText(this.state.password);
                 this.setState({ copied: true });
@@ -49,7 +49,7 @@ export class PasswdGen extends Component {
                 this.setState({ copied: false });
             }
             setTimeout(() => this.setState({ copied: null }), 1000);
-        }
+        };
 
         return <div className="passwdgen-page">
 
@@ -57,14 +57,15 @@ export class PasswdGen extends Component {
 
             <div className="config">
                 <div className="hint">Longueur :</div>
-                <input type="number" ref={this.lengthInputRef} defaultValue="10" />
+                <input type="number" ref={this.lengthInputRef} defaultValue="10"
+                    onKeyDown={(event) => event.key === "Enter" && generateHandler()} />
             </div>
 
             <div className="result">{this.state.password}</div>
 
             <div className="buttons">
-                <button className="button" onClick={generate}>Générer</button>
-                <button className="button" onClick={copy}>{this.state.copied === null ? "Copier" : (this.state.copied ? "Copié !" : "Impossible de copier")}</button>
+                <button className="button" onClick={generateHandler}>Générer</button>
+                <button className="button" onClick={copyHandler}>{this.state.copied === null ? "Copier" : (this.state.copied ? "Copié !" : "Impossible de copier")}</button>
             </div>
 
         </div>;
