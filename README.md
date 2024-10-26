@@ -2,7 +2,7 @@
 
 Mon site web créé avec ReactJS
 
-Fonctionne avec mon api https://github.com/Raraph84/Raraph84-API (Bientôt publique)
+Fonctionne avec mon api https://github.com/Raraph84/Raraph84-API (Publique un jour ?)
 
 Lien : https://www.raraph.fr
 

@@ -1,8 +1,6 @@
-export const API_HOST = process.env.NODE_ENV === "production" ? "https://api.raraph.fr" : "http://localhost:8080";
-
 export const login = async (username, password) => new Promise((resolve, reject) => {
 
-    fetch(API_HOST + "/login", {
+    fetch(process.env.REACT_APP_API_HOST + "/login", {
         method: "POST",
         body: JSON.stringify({ username, password })
     }).then((res) => {
@@ -13,7 +11,7 @@ export const login = async (username, password) => new Promise((resolve, reject)
 
 export const createAccountP1 = async (email) => new Promise((resolve, reject) => {
 
-    fetch(API_HOST + "/users", {
+    fetch(process.env.REACT_APP_API_HOST + "/users", {
         method: "POST",
         body: JSON.stringify({ email })
     }).then((res) => {
@@ -24,7 +22,7 @@ export const createAccountP1 = async (email) => new Promise((resolve, reject) =>
 
 export const createAccountP2 = async (code, username, password) => new Promise((resolve, reject) => {
 
-    fetch(API_HOST + "/users", {
+    fetch(process.env.REACT_APP_API_HOST + "/users", {
         method: "POST",
         body: JSON.stringify({ code, username, password })
     }).then((res) => {
@@ -35,7 +33,7 @@ export const createAccountP2 = async (code, username, password) => new Promise((
 
 export const logout = async () => new Promise((resolve, reject) => {
 
-    fetch(API_HOST + "/logout", {
+    fetch(process.env.REACT_APP_API_HOST + "/logout", {
         method: "POST",
         headers: { authorization: localStorage.getItem("token") }
     }).then(async (res) => {
@@ -46,7 +44,7 @@ export const logout = async () => new Promise((resolve, reject) => {
 
 export const getUser = async (user) => new Promise((resolve, reject) => {
 
-    fetch(API_HOST + "/users/" + user, {
+    fetch(process.env.REACT_APP_API_HOST + "/users/" + user, {
         method: "GET",
         headers: { authorization: localStorage.getItem("token") }
     }).then(async (res) => {
@@ -61,7 +59,7 @@ export const getUser = async (user) => new Promise((resolve, reject) => {
 
 export const getHebergs = async () => new Promise((resolve, reject) => {
 
-    fetch(API_HOST + "/hebergs", {
+    fetch(process.env.REACT_APP_API_HOST + "/hebergs", {
         method: "GET",
         headers: { authorization: localStorage.getItem("token") }
     }).then(async (res) => {
@@ -72,7 +70,7 @@ export const getHebergs = async () => new Promise((resolve, reject) => {
 
 export const getHeberg = async (hebergId) => new Promise((resolve, reject) => {
 
-    fetch(API_HOST + "/hebergs/" + hebergId, {
+    fetch(process.env.REACT_APP_API_HOST + "/hebergs/" + hebergId, {
         method: "GET",
         headers: { authorization: localStorage.getItem("token") }
     }).then(async (res) => {

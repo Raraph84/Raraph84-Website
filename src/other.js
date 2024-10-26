@@ -47,7 +47,6 @@ export class Header extends Component {
                     </div>
                     {!this.state.menu ? null : <div>
                         <Link to="/account">Mon compte</Link>
-                        <Link to="/hebergs">Mes hébergements</Link>
                         <Link to="/logout" style={{ color: "red" }}>Se déconnecter</Link>
                     </div>}
                 </div>
