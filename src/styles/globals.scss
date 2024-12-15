@@ -93,7 +93,6 @@ body {
 }
 
 header {
-    height: 86px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -101,6 +100,7 @@ header {
     border-bottom: 1px solid;
     white-space: nowrap;
     gap: 10px;
+    overflow-x: auto;
 
     .left {
         display: flex;
@@ -138,7 +138,6 @@ header {
     }
 
     .menu {
-        position: relative;
 
         button {
             display: flex;
@@ -156,13 +155,22 @@ header {
         }
 
         .submenu {
+            right: 15px;
             position: absolute;
-            width: 100%;
             display: none;
             flex-direction: column;
             background-color: var(--light-blue);
             border-radius: 0 0 10px 10px;
             text-align: center;
+            z-index: 100;
+
+            .username {
+                font-size: 18px;
+                padding-left: calc(10px + 40px + 10px);
+                padding-right: 10px;
+                height: 0;
+                overflow: hidden;
+            }
 
             a {
                 padding: 5px 10px;
@@ -208,6 +216,8 @@ footer {
     width: 100%;
     padding: 15px;
     border-top: 1px solid;
+    gap:20px;
+    flex-wrap: wrap;
 
     .links {
         margin: auto;
@@ -220,7 +230,7 @@ footer {
 
         a {
             display: block;
-            width: max-content;
+            width: fit-content;
             margin: 5px auto;
             font-size: 18px;
 
@@ -244,7 +254,6 @@ footer {
 
 .box {
     display: inline-block;
-    margin: 10px;
     padding: 15px;
     background-color: var(--light-blue);
     border-radius: 15px;
@@ -337,6 +346,7 @@ input[type=checkbox] {
     border-radius: 10px;
     animation-duration: 0.75s;
     animation-name: bounceIn;
+    max-width: 100%;
 }
 
 .hint {

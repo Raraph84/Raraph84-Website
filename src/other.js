@@ -47,6 +47,7 @@ export class Header extends Component {
                     <span>{this.state.user.username}</span>
                 </button>
                 <div className="submenu">
+                    <span className="username">Raraph84</span>
                     <Link to="/account">Mon compte</Link>
                     <Link to="/logout" style={{ color: "red" }}>Se déconnecter</Link>
                 </div>
